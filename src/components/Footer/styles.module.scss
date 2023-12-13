@@ -1,7 +1,7 @@
-@use '../../sass/main';
+@use '@/sass/main';
 
 .footer {
-  background-image: url('../../assets/footer.png');
+  background-image: url('@/assets/footer.png');
   background-size: cover;
   background-repeat: no-repeat;
   bottom: 0;

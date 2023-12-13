@@ -1,18 +1,17 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { RiShoppingCart2Line, RiShoppingCartFill } from 'react-icons/ri'
 import classNames from 'classnames'
 import { Icon } from '../Icon'
 import { SearchField } from '../SearchField'
-import Logotipo from '../../assets/logo.svg'
+import Logotipo from '@/assets/logo.svg'
 import style from './styles.module.scss'
 
 export const NavBar = () => {
   const location = useLocation()
-  const navigate = useNavigate()
 
   return (
     <nav className={style.nav_bar}>
-      <div className={style.nav_bar__logo} onClick={() => navigate('/')}>
+      <div className={style.nav_bar__logo}>
         <img src={Logotipo} alt="Logotipo Trato-Tech" />
       </div>
 

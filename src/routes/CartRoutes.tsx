@@ -1,7 +1,7 @@
 import { RouteObject } from 'react-router-dom'
-import { CartLayout } from '../layout/Cart'
-import { Cart } from '../pages/Cart'
-import { Category } from '../pages/Category'
+import { CartLayout } from '@/layout/Cart'
+import { Cart } from '@/pages/Cart'
+import { Category } from '@/pages/Category'
 
 export const CartRoutes: RouteObject = {
   path: '/',

@@ -1,4 +1,4 @@
-@use '../../sass/main';
+@use '@/sass/main';
 
 .nav_bar {
   align-items: center;
@@ -31,7 +31,6 @@
 
   &__logo {
     grid-area: logo;
-    cursor: pointer;
   }
 
   &__links {
@@ -55,14 +54,15 @@
       transition: all 0.2s ease;
 
       &:hover {
-        color: main.$masala-800;
+        color: main.$midnight-700;
+        border-bottom: 2px solid main.$midnight-700;
       }
 
       &--selected {
-        color: main.$masala-800;
+        color: main.$midnight-950;
 
         padding-bottom: 0.2rem;
-        border-bottom: 2px solid main.$masala-800;
+        border-bottom: 2px solid main.$midnight-950;
       }
     }
   }

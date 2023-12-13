@@ -1,7 +1,7 @@
-import { Header } from '../../components/Header'
-import { TitleWithImage } from '../../components/Header/TitleWithImage'
+import { Header } from '@/components/Header'
+import { TitleWithImage } from '@/components/Header/TitleWithImage'
 
-import Clock from '../../assets/inicial.png'
+import Clock from '@/assets/inicial.png'
 
 export const Home = () => {
   const HeadingProps = {

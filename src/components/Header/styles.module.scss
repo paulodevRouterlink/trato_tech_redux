@@ -1,7 +1,7 @@
-@use '../../sass/main';
+@use '@/sass/main';
 
 .header {
-  background-image: url('../../assets/fundo.png');
+  background-image: url('@/assets/fundo.png');
   background-repeat: no-repeat;
   background-size: cover;
   padding: 150px 120px 100px 120px;
