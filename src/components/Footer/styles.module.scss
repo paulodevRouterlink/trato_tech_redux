@@ -1,0 +1,28 @@
+@use '../../sass/main';
+
+.footer {
+  background-image: url('../../assets/footer.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 5rem;
+  height: 8rem;
+  width: 100%;
+
+  div {
+    display: flex;
+    gap: 5rem;
+  }
+
+  span {
+    color: main.$white-50;
+
+    font-size: 1.4rem;
+    text-align: right;
+  }
+}

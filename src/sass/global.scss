@@ -1,0 +1,34 @@
+@use './main.scss';
+
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+
+  ::-webkit-scrollbar {
+    width: 0.55rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: main.$white-200;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: main.$azure-radiance-400;
+    border-radius: 1rem;
+  }
+}
+
+body {
+  background-color: main.$white-50;
+  margin: 0;
+  font-family: main.$font_montserrat;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input {
+  border: none;
+}

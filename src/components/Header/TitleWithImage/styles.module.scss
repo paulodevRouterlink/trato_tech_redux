@@ -1,0 +1,50 @@
+@use '../../../sass/main';
+
+.header {
+  display: grid;
+  grid-template-areas: 'text image';
+  grid-template-columns: 1fr 2fr;
+  justify-content: space-between;
+
+  @media (max-width: main.$tablet) {
+    gap: 2rem;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'text' 'image';
+    text-align: center;
+  }
+
+  &__text {
+    grid-area: text;
+    color: main.$white-50;
+
+    h1 {
+      font-size: 7.55rem;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+    }
+  }
+
+  &__button {
+    display: flex;
+
+    @media (max-width: main.$tablet) {
+      justify-content: center;
+    }
+  }
+
+  &__image {
+    grid-area: image;
+    align-self: center;
+    justify-self: center;
+    overflow: hidden;
+    max-width: 70rem;
+
+    img {
+      border-radius: 144px;
+      width: 100%;
+    }
+  }
+}
