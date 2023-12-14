@@ -1,26 +1,35 @@
 import { useParams } from 'react-router-dom'
 import { Header } from '@/components/Header'
 import { TitleWithImage } from '@/components/Header/TitleWithImage'
-import { useCategories } from '@/hooks/useCategories'
+import { useAppSelector } from '@/store/hooks/useSelectRedux'
+import { CardProduct } from '@/components/CardProduct'
+import { StateProps } from '@/store'
+
+import styles from './styles.module.scss'
 
 export const Category = () => {
   const params = useParams()
-  const { CATEGORIES } = useCategories()
-  const category = CATEGORIES.find(props => props.id === params.id)
+
+  const { categories, items } = useAppSelector((state: StateProps) => ({
+    categories: state.categories.find(category => category.id === params.id),
+    items: state.items.filter(item => item.category === params.id),
+  }))
 
   const CategoryHead = {
-    title: category!.name,
-    description: category!.description,
-    image: category!.header,
+    title: categories!.name,
+    description: categories!.description,
+    image: categories!.header,
   }
 
   return (
-    <div>
+    <main>
       <Header props={CategoryHead}>
         <TitleWithImage props={CategoryHead} />
       </Header>
 
-      <h1>Category - {params.id}</h1>
-    </div>
+      <section className={styles.items__wrapper}>
+        {items?.map(props => <CardProduct key={props.id} card={props} />)}
+      </section>
+    </main>
   )
 }

@@ -1,6 +1,6 @@
 @use '@/sass/main';
 
-.item {
+.cardProduct {
   background-color: main.$white-50;
   border-radius: 1rem;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.08));
@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  width: 335px;
+  width: 33.5rem;
 
   &-description {
     display: flex;
@@ -20,20 +20,28 @@
   }
 
   &-title {
-    padding: 1.6rem 1.6rem 0 1.6rem;
+    padding: 1.6rem 1.6rem 2rem 1.6rem;
 
     h2 {
       color: main.$azure-radiance-700;
       font-size: 2rem;
+      margin-bottom: 1.4rem;
     }
 
     p {
       color: main.$masala-800;
+      font-size: 1.47rem;
+      font-weight: main.$fw_medium;
     }
   }
 
   &-image {
     margin: 0 auto;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 
   &-info {

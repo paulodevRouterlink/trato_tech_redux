@@ -1,13 +1,9 @@
-type CategoryProps = {
-  id: string
-  name: string
-  description: string
-  thumbnail: string
-  header: string
+import CATEGORIES from '@/data/[categories]'
+
+type CategoryProps = (typeof CATEGORIES)[0]
+
+type CategoryStateProps = {
+  category: typeof CATEGORIES
 }
 
-type CategoryListProps = {
-  categories: CategoryProps[]
-}
-
-export type {CategoryProps, CategoryListProps}
+export type { CategoryProps, CategoryStateProps }

@@ -1,0 +1,43 @@
+@use '@/sass/main';
+
+.cart {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 5rem 10rem;
+
+  &-all {
+    background-color: main.$alice-blue-50;
+
+    display: flex;
+    justify-content: space-between;
+
+    max-width: 80rem;
+    padding: 1.6rem;
+
+    width: 100%;
+
+    font-size: 1.65rem;
+  }
+
+  &-btn-finish {
+    background-color: main.$midnight-950;
+    border-radius: 3.6rem;
+
+    color: main.$white-50;
+
+    font-size: 2.4rem;
+    padding: 2rem 5rem;
+
+    transition: all 0.2s ease-in;
+
+    &:hover {
+      background-color: transparent;
+      color: main.$midnight-700;
+      border: 0.2rem solid main.$midnight-700;
+
+      transform: translateY(-2px);
+    }
+  }
+}

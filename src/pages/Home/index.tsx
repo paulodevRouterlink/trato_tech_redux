@@ -8,10 +8,7 @@ import styles from './styles.module.scss'
 
 export const Home = () => {
   const navigate = useNavigate()
-  const { CATEGORIES, category } = useCategories()
-
-  console.log(category)
-  console.log(CATEGORIES)
+  const { CATEGORIES } = useCategories()
 
   const HeadingProps = {
     title: 'Classificados Tech',
@@ -28,20 +25,20 @@ export const Home = () => {
         />
       </Header>
 
-      <div className={styles.categories}>
+      <main className={styles.categories}>
         <div className={styles['categories-title']}>
           <h1>Categorias</h1>
         </div>
 
-        <div className={styles['categories-container']}>
+        <section className={styles['categories-container']}>
           {CATEGORIES.map(item => (
             <div key={item.id} onClick={() => navigate(`/category/${item.id}`)}>
               <img src={item.thumbnail} alt={item.name} />
               <h1>{item.name}</h1>
             </div>
           ))}
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   )
 }
