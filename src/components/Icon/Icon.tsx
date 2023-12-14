@@ -1,4 +1,5 @@
 import { ElementType } from 'react'
+import { COLORS } from '@/styles/colors'
 
 type IconProps = {
   icon: ElementType
@@ -7,7 +8,7 @@ type IconProps = {
 
 export const Icon = ({ icon: Icon, size }: IconProps) => {
   const iconStyleProps = {
-    color: 'white',
+    color: COLORS.white[50],
     size: size,
   }
 

@@ -22,7 +22,6 @@
 
 body {
   background-color: main.$white-50;
-  margin: 0;
   font-family: main.$font_montserrat;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -31,4 +30,8 @@ body {
 
 input {
   border: none;
+}
+
+button {
+  cursor: pointer;
 }

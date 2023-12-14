@@ -1,16 +1,17 @@
 @use '@/sass/main';
 
-.header {
+.heading {
   display: grid;
   grid-template-areas: 'text image';
   grid-template-columns: 1fr 2fr;
   justify-content: space-between;
 
   @media (max-width: main.$tablet) {
-    gap: 2rem;
     grid-template-rows: auto 1fr;
     grid-template-columns: 1fr;
     grid-template-areas: 'text' 'image';
+    gap: 2rem;
+
     text-align: center;
   }
 
@@ -19,11 +20,16 @@
     color: main.$white-50;
 
     h1 {
+      font-weight: main.$fw_bold;
       font-size: 7.55rem;
+
+      letter-spacing: 0.35rem;
+      text-shadow: 1px 1px 2px rgba(0, 3, 77, 0.8);
     }
 
     h2 {
       font-size: 2.5rem;
+      font-weight: main.$fw_light;
     }
   }
 
@@ -42,9 +48,20 @@
     overflow: hidden;
     max-width: 70rem;
 
+    border-radius: 144rem;
+    margin-inline: auto;
+
+    background-color: main.$white-50;
+
     img {
-      border-radius: 144px;
       width: 100%;
+
+      transition: all 0.3s ease-in-out 200ms;
+
+      &:hover {
+        transform: scale(1.1);
+        filter: brightness(120%);
+      }
     }
   }
 }

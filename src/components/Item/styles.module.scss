@@ -1,0 +1,98 @@
+@use '@/sass/main';
+
+.item {
+  background-color: main.$white-50;
+  border-radius: 1rem;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.08));
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 335px;
+
+  &-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+
+    background-color: main.$alice-blue-50;
+  }
+
+  &-title {
+    padding: 1.6rem 1.6rem 0 1.6rem;
+
+    h2 {
+      color: main.$azure-radiance-700;
+      font-size: 2rem;
+    }
+
+    p {
+      color: main.$masala-800;
+    }
+  }
+
+  &-image {
+    margin: 0 auto;
+  }
+
+  &-info {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-price {
+    background-color: main.$azure-radiance-800;
+    color: main.$white-50;
+
+    font-size: 2rem;
+    height: 7rem;
+    width: 17rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex: 1;
+  }
+
+  &-action {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.itemCart {
+  width: 100%;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    svg {
+      cursor: pointer;
+    }
+  }
+
+  .item-actions {
+    gap: 5rem;
+    justify-content: flex-end;
+    padding: 0 5rem;
+  }
+}
