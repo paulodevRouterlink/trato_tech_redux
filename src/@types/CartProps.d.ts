@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { ItemProps } from './ItemsProps'
+
 type CardProductInfo = {
   quantity?: number
-  cart?: string | number
+  cart?: number
 }
 
 type CartProps = ItemProps & CardProductInfo & any
 
-export type { CardProductInfo, CartProps }
+type CartType = ItemProps & { cart: ItemProps[]; quantity: number }
+
+export type { CardProductInfo, CartProps, CartType }
