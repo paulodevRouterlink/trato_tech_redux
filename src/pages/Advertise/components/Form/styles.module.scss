@@ -1,0 +1,60 @@
+@use '@/sass/main';
+
+@mixin fonts {
+  font-family: main.$font_montserrat;
+  font-weight: main.$fw_semibold;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  gap: 2rem;
+
+  margin: 2rem auto;
+  width: 70%;
+
+  input,
+  select {
+    background: main.$wild-sand-50;
+    border: none;
+    border-radius: 0.5rem;
+    outline: 0.2rem solid transparent;
+    transition: all 0.3s ease-in-out;
+
+    @include fonts;
+
+    padding: 1rem 2rem;
+
+    &:focus {
+      outline: 0.2rem solid main.$azure-radiance-700;
+    }
+
+    &::placeholder {
+      @include fonts;
+    }
+  }
+
+  select {
+    appearance: none;
+
+    // &::after {
+    //   content: '\25BC'; /* Adiciona uma seta de dropdown personalizada */
+    //   position: absolute;
+    //   top: 50%;
+    //   right: 10px;
+    //   transform: translateY(-50%);
+    //   color: main.$midnight-600;
+    // }
+
+    option {
+      @include fonts;
+    }
+  }
+
+  &-action {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

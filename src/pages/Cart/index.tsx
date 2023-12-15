@@ -1,10 +1,11 @@
 import { Header } from '@/components/Header'
 import { StateProps } from '@/store'
 import { CardProduct } from '@/components/CardProduct'
+import { Button } from '@/components/Button'
 import { CartType } from '@/@types/CartProps'
 
 import { useCartProduct } from '@/hooks/useCartProduct'
-import { useAppSelector } from '@/store/hooks/useSelectRedux'
+import { useAppSelector } from '@/store/hooks/useRedux'
 
 import styles from './styles.module.scss'
 
@@ -49,9 +50,10 @@ export const Cart = () => {
             Subtotal: <strong>R$ {allItem.toFixed(2)}</strong>
           </span>
         </div>
-        <button className={styles['cart-btn-finish']} onClick={handleResetCart}>
-          Finalizar compra
-        </button>
+        <Button
+          props={{ label: 'Finalizar compra' }}
+          onClick={handleResetCart}
+        />
       </section>
     </div>
   )

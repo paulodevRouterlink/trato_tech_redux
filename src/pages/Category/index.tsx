@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { Header } from '@/components/Header'
 import { TitleWithImage } from '@/components/Header/TitleWithImage'
-import { useAppSelector } from '@/store/hooks/useSelectRedux'
+import { useAppSelector } from '@/store/hooks/useRedux'
 import { CardProduct } from '@/components/CardProduct'
 
 import styles from './styles.module.scss'

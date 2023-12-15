@@ -1,5 +1,5 @@
 import { StateProps } from '@/store'
-import { useAppSelector } from '@/store/hooks/useSelectRedux'
+import { useAppSelector } from '@/store/hooks/useRedux'
 import { useSelector } from 'react-redux'
 
 export const useCategories = () => {

@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '@/store/hooks/useSelectRedux'
+import { useAppDispatch, useAppSelector } from '@/store/hooks/useRedux'
 import { changeSearchingAction, resetSearching } from '@/store/reducers/search'
 import styles from './styles.module.scss'
 
