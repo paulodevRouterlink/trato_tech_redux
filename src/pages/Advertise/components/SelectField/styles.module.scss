@@ -1,0 +1,56 @@
+@use '@/sass/main';
+
+$size-select-icon: 3.4rem;
+
+@mixin fonts-select {
+  font-family: main.$font_montserrat;
+  font-weight: main.$fw_semibold;
+}
+
+.select-field {
+  background: url('@/assets/angle-small-down.svg') no-repeat right
+    main.$alice-blue-50;
+  background-size: contain;
+  width: 100%;
+  height: $size-select-icon;
+  overflow: hidden;
+  border-radius: 0.5rem;
+
+  border: none;
+
+  &:focus-visible {
+    outline: none;
+    border: none;
+  }
+
+  select {
+    background: transparent; /* importante para exibir o novo ícone */
+    width: 100%;
+    padding: 1rem 2rem;
+
+    font-size: 1.4rem;
+    line-height: 1;
+    border: none;
+    border-radius: 0;
+    height: $size-select-icon;
+    -webkit-appearance: none;
+
+    outline: 0.2rem solid transparent;
+    transition: all 0.3s ease-in-out;
+
+    &:focus-visible {
+      outline: 0.2rem solid main.$azure-radiance-700;
+      border: none;
+    }
+
+    @include fonts-select;
+
+    &::placeholder {
+      @include fonts-select;
+    }
+
+    option {
+      @include fonts-select;
+    }
+  }
+}

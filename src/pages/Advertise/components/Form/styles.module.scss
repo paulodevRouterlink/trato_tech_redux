@@ -3,6 +3,7 @@
 @mixin fonts {
   font-family: main.$font_montserrat;
   font-weight: main.$fw_semibold;
+  font-size: 1.4rem;
 }
 
 .form {
@@ -15,9 +16,8 @@
   margin: 2rem auto;
   width: 70%;
 
-  input,
-  select {
-    background: main.$wild-sand-50;
+  input {
+    background: main.$alice-blue-50;
     border: none;
     border-radius: 0.5rem;
     outline: 0.2rem solid transparent;
@@ -27,28 +27,13 @@
 
     padding: 1rem 2rem;
 
+    color: main.$azure-radiance-900;
+
     &:focus {
       outline: 0.2rem solid main.$azure-radiance-700;
     }
 
     &::placeholder {
-      @include fonts;
-    }
-  }
-
-  select {
-    appearance: none;
-
-    // &::after {
-    //   content: '\25BC'; /* Adiciona uma seta de dropdown personalizada */
-    //   position: absolute;
-    //   top: 50%;
-    //   right: 10px;
-    //   transform: translateY(-50%);
-    //   color: main.$midnight-600;
-    // }
-
-    option {
       @include fonts;
     }
   }
