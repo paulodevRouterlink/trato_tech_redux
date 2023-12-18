@@ -1,26 +1,29 @@
 @use '@/sass/main';
 
+$padding: 1.6rem;
+
 .cardProduct {
   background-color: main.$white-50;
   border-radius: 1rem;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.08));
 
-  display: flex;
-  flex-direction: column;
+  @extend .flex;
+  @extend .flex-col;
+
   overflow: hidden;
   width: 33.5rem;
 
   &-description {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    @extend .flex;
+    @extend .flex-col;
+    @extend .justify-between;
     flex: 1;
 
     background-color: main.$alice-blue-50;
   }
 
   &-title {
-    padding: 1.6rem 1.6rem 2rem 1.6rem;
+    padding: $padding $padding 2rem $padding;
 
     h2 {
       color: main.$azure-radiance-700;
@@ -45,8 +48,8 @@
   }
 
   &-info {
-    display: flex;
-    justify-content: space-between;
+    @extend .flex;
+    @extend .justify-between;
   }
 
   &-price {
@@ -57,9 +60,9 @@
     height: 7rem;
     width: 17rem;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @extend .flex;
+    @extend .align-center;
+    @extend .justify-center;
   }
 
   &-actions {

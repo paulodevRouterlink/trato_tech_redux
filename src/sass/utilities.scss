@@ -25,13 +25,13 @@
 
 // Utilitário para configurar um contêiner flex
 .flex {
+  display: flex;
+
   &.row {
-    display: flex;
     flex-direction: row;
   }
 
   &.flex-col {
-    display: flex;
     flex-direction: column;
   }
 
@@ -76,15 +76,15 @@
     flex: 3;
   }
 
-  &.align-self-center {
+  &.items-self-center {
     align-self: center;
   }
 
-  &.align-self-start {
+  &.items-self-start {
     align-self: flex-start;
   }
 
-  &.align-self-end {
+  &.items-self-end {
     align-self: flex-end;
   }
 

@@ -3,6 +3,7 @@
 @mixin fonts {
   font-family: main.$font_montserrat;
   font-weight: main.$fw_semibold;
+  font-size: 1.1rem;
 }
 
 $padding-error: 0.5rem;
@@ -11,6 +12,5 @@ $padding-error: 0.5rem;
   color: main.$red-600;
   padding: 0 $padding-error $padding-error $padding-error;
 
-  font-size: 1.1rem;
   @include fonts;
 }

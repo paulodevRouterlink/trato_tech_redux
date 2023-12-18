@@ -1,35 +1,45 @@
+import { useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { useAppSelector } from '@/store/hooks/useRedux'
 import { Button } from '@/components/Button'
 import { SelectField } from '../SelectField'
 import { InputField } from '../InputField'
 import { Options } from '../Options'
-
+import { useCategories } from '@/hooks/useCategories'
+import { useAppDispatch } from '@/store/hooks/useRedux'
+import { createItem } from '@/store/reducers/items'
 import styles from './styles.module.scss'
-import { useState } from 'react'
 
 const schema = z.object({
-  name: z.string().min(4, 'Digite o nome do produto'),
+  title: z.string().min(4, 'Digite o nome do produto'),
   description: z.string().min(15, 'Digite a descrição do produto'),
-  image: z.string().url('Digite uma URL válida'),
+  photoUrl: z.string().url('Digite uma URL válida'),
   categories: z.string().nonempty('Selecione uma categoria válida'),
-  price: z.string().min(1, { message: 'Por favor digite um preço válido' }),
+  price: z
+    .number({
+      required_error: 'Digite o preço',
+      invalid_type_error: 'Digite o preço do produto',
+    })
+    .positive('Por favor digite um preço válido'),
+  // price: z.number().min(0, { message: 'Por favor digite um preço válido' }),
 })
 
 type SchemaFormProps = z.infer<typeof schema>
 
 export const Form = () => {
   const [output, setOutput] = useState('')
+  const { CATEGORIES } = useCategories()
+  const dispatch = useAppDispatch()
+  // const items = useAppSelector(state => state.items)
+
+  // console.log('ITEMS - cadastrado ==> ', items)
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SchemaFormProps>({
-    mode: 'all',
-    reValidateMode: 'onChange',
     resolver: zodResolver(schema),
     defaultValues: {
       categories: '',
@@ -41,18 +51,25 @@ export const Form = () => {
   const createdAdvertise = (data: SchemaFormProps) => {
     console.log({ data })
     setOutput(JSON.stringify(data, null, 2))
+
+    dispatch(createItem(data))
   }
 
-  const categories = useAppSelector(state =>
-    state.categories.map(({ id, name }) => ({ id, name }))
-  )
+  const optionsCategory = useMemo(() => {
+    const data = CATEGORIES.map(props => ({
+      id: props.id,
+      name: props.name,
+    }))
+
+    return data
+  }, [CATEGORIES])
 
   return (
     <>
       <form className={styles.form} onSubmit={handleSubmit(createdAdvertise)}>
-        <InputField errors={errors.name?.message}>
+        <InputField errors={errors.title?.message}>
           <input
-            {...register('name')}
+            {...register('title')}
             type="text"
             placeholder="Nome do produto"
           />
@@ -66,9 +83,9 @@ export const Form = () => {
           />
         </InputField>
 
-        <InputField errors={errors.image?.message}>
+        <InputField errors={errors.photoUrl?.message}>
           <input
-            {...register('image')}
+            {...register('photoUrl')}
             type="text"
             placeholder="URL da imagem do produto"
           />
@@ -76,15 +93,26 @@ export const Form = () => {
 
         <InputField errors={errors.price?.message}>
           <input
-            {...register('price')}
+            {...register('price', {
+              required: 'Este campo é obrigatório',
+              min: {
+                value: 1,
+                message: 'O preço deve ser maior que 1',
+              },
+              valueAsNumber: true,
+            })}
             type="number"
             placeholder="Preço do produto"
+            min={0}
           />
         </InputField>
 
         <SelectField errors={errors.categories?.message}>
           <select {...register('categories')}>
-            <Options label="Selecione uma categoria" options={categories} />
+            <Options
+              label="Selecione uma categoria"
+              options={optionsCategory}
+            />
           </select>
         </SelectField>
 
@@ -96,6 +124,7 @@ export const Form = () => {
       <pre
         style={{
           margin: '2rem auto',
+          paddingInline: '2rem',
           display: 'flex',
           alignItems: 'center',
           fontSize: '2rem',

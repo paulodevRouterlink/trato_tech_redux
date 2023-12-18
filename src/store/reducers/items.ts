@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { v4 as uuid } from 'uuid'
 import { ItemProps } from '@/@types/ItemsProps'
 import ITEMS from '@/data/[items]'
 
@@ -15,10 +16,10 @@ const itemSlice = createSlice({
       })
     },
     createItem: (state, { payload }) => {
-      console.log('Payload ==>', payload)
+      state.push({...payload, id: uuid()})
     },
   },
 })
 
-export const { changeFavorite } = itemSlice.actions
+export const { changeFavorite, createItem } = itemSlice.actions
 export default itemSlice.reducer

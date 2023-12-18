@@ -1,18 +1,17 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from '@/store/hooks/useRedux'
 import {
   changeCartAction,
   changeQuantityAction,
   resetCart,
 } from '@/store/reducers/cart'
 import { changeFavorite } from '@/store/reducers/items'
-import { StateProps } from '@/store'
 
 type CartProductProps = { id?: string }
 
 export const useCartProduct = ({ id }: CartProductProps) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
-  const isCart = useSelector((state: StateProps) =>
+  const isCart = useAppSelector(state =>
     state.cart.some(item => item.id === id)
   )
 
