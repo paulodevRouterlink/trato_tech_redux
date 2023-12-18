@@ -1,0 +1,44 @@
+@use '@/sass/main';
+
+@mixin fonts {
+  font-family: main.$font_montserrat;
+  font-weight: main.$fw_semibold;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+
+  input {
+    background: main.$alice-blue-50;
+    border: none;
+    border-radius: 0.5rem;
+    outline: 0.2rem solid transparent;
+    transition: all 0.3s ease-in-out;
+    font-size: 1.4rem;
+
+    width: 100%;
+
+    @include fonts;
+
+    padding: 1rem 2rem;
+    margin-bottom: 0.5rem;
+
+    color: main.$azure-radiance-900;
+
+    &:focus {
+      outline: 0.2rem solid main.$azure-radiance-700;
+    }
+
+    &::placeholder {
+      @include fonts;
+      color: main.$masala-500;
+    }
+  }
+}
+
+.input-error {
+  input {
+    outline: 0.2rem solid main.$red-600;
+  }
+}

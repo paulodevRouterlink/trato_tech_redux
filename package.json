@@ -11,7 +11,6 @@
 		"prettier": "prettier --write ."
 	},
 	"dependencies": {
-		"@hookform/resolvers": "^3.3.2",
 		"@reduxjs/toolkit": "^2.0.1",
 		"classnames": "^2.3.2",
 		"react": "^18.2.0",
@@ -25,6 +24,7 @@
 		"zod": "^3.22.4"
 	},
 	"devDependencies": {
+		"@hookform/resolvers": "^3.3.2",
 		"@types/node": "^20.10.4",
 		"@types/react": "^18.2.43",
 		"@types/react-dom": "^18.2.17",

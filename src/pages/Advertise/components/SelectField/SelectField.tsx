@@ -1,21 +1,23 @@
-import { SelectHTMLAttributes } from 'react'
+import { ReactNode } from 'react'
+import classNames from 'classnames'
+import { Alert } from '@/components/Alert'
 
-type SelectFieldProps = SelectHTMLAttributes<HTMLSelectElement> & {
-  categories: {
-    id: string
-    name: string
-  }[]
+import styles from './styles.module.scss'
+
+type SelectFieldProps = {
+  errors: string | undefined
+  children: ReactNode
 }
 
-export const SelectField = ({ categories, ...props }: SelectFieldProps) => (
-  <select {...props}>
-    <option value="" disabled>
-      Selecione a categoria
-    </option>
-    {categories.map(props => (
-      <option key={props.id} value={props.id}>
-        {props.name}
-      </option>
-    ))}
-  </select>
+export const SelectField = ({ errors, children }: SelectFieldProps) => (
+  <>
+    <div
+      className={classNames(styles['select-field'], {
+        [styles['select-error']]: errors,
+      })}
+    >
+      {children}
+    </div>
+    {errors && <Alert props={{ error: errors }} />}
+  </>
 )

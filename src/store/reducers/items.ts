@@ -14,6 +14,9 @@ const itemSlice = createSlice({
         return item
       })
     },
+    createItem: (state, { payload }) => {
+      console.log('Payload ==>', payload)
+    },
   },
 })
 

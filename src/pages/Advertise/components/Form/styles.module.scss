@@ -8,37 +8,14 @@
 $padding-error: 0.5rem;
 
 .form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  @extend .flex;
+  @extend .flex-col;
+  @extend .justify-center;
   flex: 1;
   gap: 1rem;
 
+  width: 60%;
   margin: 2rem auto;
-  width: 70%;
-
-  input {
-    background: main.$alice-blue-50;
-    border: none;
-    border-radius: 0.5rem;
-    outline: 0.2rem solid transparent;
-    transition: all 0.3s ease-in-out;
-    font-size: 1.4rem;
-
-    @include fonts;
-
-    padding: 1rem 2rem;
-
-    color: main.$azure-radiance-900;
-
-    &:focus {
-      outline: 0.2rem solid main.$azure-radiance-700;
-    }
-
-    &::placeholder {
-      @include fonts;
-    }
-  }
 
   .message-error {
     color: main.$red-600;
