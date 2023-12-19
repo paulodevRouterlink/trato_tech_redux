@@ -1,11 +1,12 @@
 import { RouteObject } from 'react-router-dom'
-import { CartLayout } from '@/layout/Cart'
+import { ProductLayout } from '@/layout/Product'
 import { Cart } from '@/pages/Cart'
 import { Category } from '@/pages/Category'
+import { Advertise } from '@/pages/Advertise'
 
-export const CartRoutes: RouteObject = {
+export const ProductRoutes: RouteObject = {
   path: '/',
-  element: <CartLayout />,
+  element: <ProductLayout />,
   children: [
     {
       path: 'cart',
@@ -14,6 +15,10 @@ export const CartRoutes: RouteObject = {
     {
       path: 'category/:id',
       element: <Category />,
+    },
+    {
+      path: 'category/:id/item/:id',
+      element: <Advertise />,
     },
   ],
 }

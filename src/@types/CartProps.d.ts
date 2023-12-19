@@ -8,6 +8,6 @@ type CardProductInfo = {
 
 type CartProps = ItemProps & CardProductInfo & any
 
-type CartType = ItemProps & { cart: ItemProps[]; quantity: number }
+type CartType = ItemProps & { cart: ItemProps; quantity: number }
 
 export type { CardProductInfo, CartProps, CartType }

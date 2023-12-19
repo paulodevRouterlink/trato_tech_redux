@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom'
 import { FaCartPlus } from 'react-icons/fa'
+import { FiEdit } from 'react-icons/fi'
 import {
   AiOutlineHeart,
   AiFillHeart,
@@ -37,6 +39,7 @@ export const CardProduct = ({ card, cart }: CardProductProps) => {
     incrementQuantity,
     decrementQuantity,
   } = useCartProduct({ id })
+  const navigate = useNavigate()
 
   const handleDecrementQuantity = () => {
     decrementQuantity({ quantity: cart!.quantity })
@@ -100,6 +103,12 @@ export const CardProduct = ({ card, cart }: CardProductProps) => {
                   isCart ? COLORS.azure_radiance[700] : iconItemProps.color
                 }
                 onClick={handleAddToCart}
+              />
+            )}
+            {!cart && (
+              <FiEdit
+                className={styles['edit-action']}
+                onClick={() => navigate(`item/${id}`)}
               />
             )}
           </div>

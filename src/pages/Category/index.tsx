@@ -5,12 +5,11 @@ import { useAppSelector } from '@/store/hooks/useRedux'
 import { CardProduct } from '@/components/CardProduct'
 
 import styles from './styles.module.scss'
-import { StateProps } from '@/store'
 
 export const Category = () => {
   const params = useParams()
 
-  const { categories, items } = useAppSelector((state: StateProps) => {
+  const { categories, items } = useAppSelector(state => {
     const regexp = new RegExp(state.search, 'i')
 
     return {
@@ -30,7 +29,7 @@ export const Category = () => {
   return (
     <main>
       <Header props={CategoryHead}>
-        <TitleWithImage props={CategoryHead} />
+        <TitleWithImage props={CategoryHead} imageUrl={CategoryHead.image} />
       </Header>
 
       <section className={styles.items__wrapper}>

@@ -7,3 +7,11 @@
 
   flex: 1;
 }
+
+.image {
+  @extend .flex;
+  @extend .align-center;
+  @extend .justify-center;
+
+  margin-block: 2rem;
+}

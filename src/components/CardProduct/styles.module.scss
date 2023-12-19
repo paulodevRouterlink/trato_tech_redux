@@ -1,6 +1,7 @@
 @use '@/sass/main';
 
 $padding: 1.6rem;
+$width: 33.5rem;
 
 .cardProduct {
   background-color: main.$white-50;
@@ -11,7 +12,7 @@ $padding: 1.6rem;
   @extend .flex-col;
 
   overflow: hidden;
-  width: 33.5rem;
+  width: $width;
 
   &-description {
     @extend .flex;
@@ -40,6 +41,7 @@ $padding: 1.6rem;
 
   &-image {
     margin: 0 auto;
+    width: $width;
 
     img {
       width: 100%;
@@ -70,6 +72,12 @@ $padding: 1.6rem;
     align-items: center;
     justify-content: space-evenly;
     flex: 1;
+
+    .edit-action {
+      font-size: 2.2rem;
+      color: main.$midnight-950;
+      cursor: pointer;
+    }
   }
 
   &-action {

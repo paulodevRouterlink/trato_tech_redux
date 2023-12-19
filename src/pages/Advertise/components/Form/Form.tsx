@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -8,21 +9,21 @@ import { InputField } from '../InputField'
 import { Options } from '../Options'
 import { useCategories } from '@/hooks/useCategories'
 import { useAppDispatch } from '@/store/hooks/useRedux'
-import { createItem } from '@/store/reducers/items'
+import { createItem, updateItem } from '@/store/reducers/items'
+import { useEditItems } from '@/hooks/useEditItems'
 import styles from './styles.module.scss'
 
 const schema = z.object({
   title: z.string().min(4, 'Digite o nome do produto'),
   description: z.string().min(15, 'Digite a descrição do produto'),
-  photoUrl: z.string().url('Digite uma URL válida'),
-  categories: z.string().nonempty('Selecione uma categoria válida'),
+  photoUrl: z.string().min(2, 'Digite uma URL válida'),
+  category: z.string().nonempty('Selecione uma categoria válida'),
   price: z
     .number({
       required_error: 'Digite o preço',
       invalid_type_error: 'Digite o preço do produto',
     })
     .positive('Por favor digite um preço válido'),
-  // price: z.number().min(0, { message: 'Por favor digite um preço válido' }),
 })
 
 type SchemaFormProps = z.infer<typeof schema>
@@ -31,9 +32,17 @@ export const Form = () => {
   const [output, setOutput] = useState('')
   const { CATEGORIES } = useCategories()
   const dispatch = useAppDispatch()
-  // const items = useAppSelector(state => state.items)
+  const { product: item } = useEditItems()
+  const params = useParams()
+  const product = item!
 
-  // console.log('ITEMS - cadastrado ==> ', items)
+  const formDefault: SchemaFormProps = {
+    title: params.id === product?.id ? product?.title : '',
+    description: params.id === product?.id ? product?.description : '',
+    price: params.id === product?.id ? product?.price : 0,
+    category: params.id === product?.id ? product?.category : '',
+    photoUrl: params.id === product?.id ? product?.photoUrl : '',
+  }
 
   const {
     register,
@@ -42,17 +51,39 @@ export const Form = () => {
   } = useForm<SchemaFormProps>({
     resolver: zodResolver(schema),
     defaultValues: {
-      categories: '',
+      title: formDefault.title,
+      description: formDefault.description,
+      price: formDefault.price,
+      category: formDefault.category,
+      photoUrl: formDefault.photoUrl,
     },
   })
 
-  console.log('Errors ==> ', errors)
-
-  const createdAdvertise = (data: SchemaFormProps) => {
+  const createdProduct = (data: SchemaFormProps) => {
     console.log({ data })
     setOutput(JSON.stringify(data, null, 2))
 
+    console.log('FORM', data)
     dispatch(createItem(data))
+  }
+
+  const updatedProduct = (data: SchemaFormProps) => {
+    const itemID = product.id
+    const dataItem = {
+      id: product.id,
+      title: data.title,
+      description: data.description,
+      price: data.price,
+      category: data.category,
+      photoUrl: product.photoUrl,
+      favorite: product.favorite,
+    }
+
+    setOutput(JSON.stringify(dataItem, null, 2))
+
+    console.log('data updated ==> ', dataItem)
+
+    dispatch(updateItem({ itemID, item: dataItem }))
   }
 
   const optionsCategory = useMemo(() => {
@@ -64,9 +95,13 @@ export const Form = () => {
     return data
   }, [CATEGORIES])
 
+  const isEditItem = params.id
+    ? handleSubmit(updatedProduct)
+    : handleSubmit(createdProduct)
+
   return (
     <>
-      <form className={styles.form} onSubmit={handleSubmit(createdAdvertise)}>
+      <form className={styles.form} onSubmit={isEditItem}>
         <InputField errors={errors.title?.message}>
           <input
             {...register('title')}
@@ -88,6 +123,7 @@ export const Form = () => {
             {...register('photoUrl')}
             type="text"
             placeholder="URL da imagem do produto"
+            disabled={!!formDefault.photoUrl}
           />
         </InputField>
 
@@ -107,8 +143,8 @@ export const Form = () => {
           />
         </InputField>
 
-        <SelectField errors={errors.categories?.message}>
-          <select {...register('categories')}>
+        <SelectField errors={errors.category?.message}>
+          <select {...register('category')}>
             <Options
               label="Selecione uma categoria"
               options={optionsCategory}

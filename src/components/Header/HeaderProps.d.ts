@@ -1,7 +1,7 @@
 type HeaderProps = {
   title: string
   description: string
-  image?: string
+  imageUrl?: string
 }
 
 export type { HeaderProps }

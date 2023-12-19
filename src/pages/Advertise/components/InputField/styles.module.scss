@@ -34,6 +34,10 @@
       @include fonts;
       color: main.$masala-500;
     }
+
+    &:disabled {
+      background-color: main.$masala-100;
+    }
   }
 }
 
