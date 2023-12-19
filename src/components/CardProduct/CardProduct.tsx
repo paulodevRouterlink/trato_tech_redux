@@ -1,20 +1,19 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { FaCartPlus } from 'react-icons/fa'
+import { FiEdit } from 'react-icons/fi'
 import {
   AiOutlineHeart,
   AiFillHeart,
   AiFillMinusCircle,
   AiFillPlusCircle,
 } from 'react-icons/ai'
+import classNames from 'classnames'
 
 import { COLORS } from '@/styles/colors'
 import { ItemProps } from '@/@types/ItemsProps'
-import { changeFavorite } from '@/store/reducers/items'
-import { CardProductInfo } from '@/@types/CartProps'
+import { CartType } from '@/@types/CartProps'
+import { useCartProduct } from '@/hooks/useCartProduct'
 import styles from './styles.module.scss'
-import { changeCart } from '@/store/reducers/cart'
-import { StateProps } from '@/store'
-import classNames from 'classnames'
 
 const iconItemProps = {
   size: 24,
@@ -27,23 +26,23 @@ const iconQuantityProps = {
 }
 
 type CardProductProps = {
-  card: ItemProps & CardProductInfo
+  card: ItemProps
+  cart?: CartType
 }
 
-export const CardProduct = ({ card }: CardProductProps) => {
-  const { id, title, price, description, photoUrl, favorite, cart } = card
-  const dispatch = useDispatch()
+export const CardProduct = ({ card, cart }: CardProductProps) => {
+  const { id, title, price, description, photoUrl, favorite } = card
+  const {
+    isCart,
+    handleFavorite,
+    handleAddToCart,
+    incrementQuantity,
+    decrementQuantity,
+  } = useCartProduct({ id })
+  const navigate = useNavigate()
 
-  const isCart = useSelector((state: StateProps) =>
-    state.cart.some(item => item.id === id)
-  )
-
-  const handleFavorite = () => {
-    dispatch(changeFavorite(id))
-  }
-
-  const handleAddToCart = () => {
-    dispatch(changeCart(id))
+  const handleDecrementQuantity = () => {
+    decrementQuantity({ quantity: cart!.quantity })
   }
 
   return (
@@ -85,10 +84,16 @@ export const CardProduct = ({ card }: CardProductProps) => {
 
             {cart ? (
               <div className={styles.quantity}>
-                Quantidade:
-                <AiFillMinusCircle {...iconQuantityProps} />
-                <span></span>
-                <AiFillPlusCircle {...iconQuantityProps} />
+                <span>Quantidade: </span>
+                <AiFillMinusCircle
+                  {...iconQuantityProps}
+                  onClick={handleDecrementQuantity}
+                />
+                <span>{String(cart!.quantity || 0).padStart(2, '0')}</span>
+                <AiFillPlusCircle
+                  {...iconQuantityProps}
+                  onClick={incrementQuantity}
+                />
               </div>
             ) : (
               <FaCartPlus
@@ -98,6 +103,12 @@ export const CardProduct = ({ card }: CardProductProps) => {
                   isCart ? COLORS.azure_radiance[700] : iconItemProps.color
                 }
                 onClick={handleAddToCart}
+              />
+            )}
+            {!cart && (
+              <FiEdit
+                className={styles['edit-action']}
+                onClick={() => navigate(`item/${id}`)}
               />
             )}
           </div>

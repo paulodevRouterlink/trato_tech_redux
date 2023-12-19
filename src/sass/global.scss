@@ -7,7 +7,7 @@
   margin: 0;
 
   ::-webkit-scrollbar {
-    width: 0.55rem;
+    width: 0.85rem;
   }
 
   ::-webkit-scrollbar-track {
@@ -15,7 +15,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: main.$azure-radiance-400;
+    background: main.$azure-radiance-800;
     border-radius: 1rem;
   }
 }

@@ -21,6 +21,7 @@ export const Home = () => {
       <Header props={HeadingProps}>
         <TitleWithImage
           props={HeadingProps}
+          imageUrl={HeadingProps.image}
           style={{ paddingBottom: '25rem' }}
         />
       </Header>

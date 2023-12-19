@@ -1,0 +1,17 @@
+@use '@/sass/main';
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex: 1;
+}
+
+.image {
+  @extend .flex;
+  @extend .align-center;
+  @extend .justify-center;
+
+  margin-block: 2rem;
+}

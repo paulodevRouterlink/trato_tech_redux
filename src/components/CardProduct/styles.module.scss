@@ -1,26 +1,30 @@
 @use '@/sass/main';
 
+$padding: 1.6rem;
+$width: 33.5rem;
+
 .cardProduct {
   background-color: main.$white-50;
   border-radius: 1rem;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.08));
 
-  display: flex;
-  flex-direction: column;
+  @extend .flex;
+  @extend .flex-col;
+
   overflow: hidden;
-  width: 33.5rem;
+  width: $width;
 
   &-description {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    @extend .flex;
+    @extend .flex-col;
+    @extend .justify-between;
     flex: 1;
 
     background-color: main.$alice-blue-50;
   }
 
   &-title {
-    padding: 1.6rem 1.6rem 2rem 1.6rem;
+    padding: $padding $padding 2rem $padding;
 
     h2 {
       color: main.$azure-radiance-700;
@@ -37,6 +41,7 @@
 
   &-image {
     margin: 0 auto;
+    width: $width;
 
     img {
       width: 100%;
@@ -45,8 +50,8 @@
   }
 
   &-info {
-    display: flex;
-    justify-content: space-between;
+    @extend .flex;
+    @extend .justify-between;
   }
 
   &-price {
@@ -57,9 +62,9 @@
     height: 7rem;
     width: 17rem;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @extend .flex;
+    @extend .align-center;
+    @extend .justify-center;
   }
 
   &-actions {
@@ -67,6 +72,12 @@
     align-items: center;
     justify-content: space-evenly;
     flex: 1;
+
+    .edit-action {
+      font-size: 2.2rem;
+      color: main.$midnight-950;
+      cursor: pointer;
+    }
   }
 
   &-action {
@@ -93,12 +104,25 @@
     justify-content: center;
     gap: 1rem;
 
+    span {
+      font-weight: main.$fw_semibold;
+
+      &:nth-child(1) {
+        font-size: 1.35rem;
+      }
+
+      &:nth-child(3) {
+        color: main.$masala-950;
+        font-size: 1.25rem;
+      }
+    }
+
     svg {
       cursor: pointer;
     }
   }
 
-  .item-actions {
+  .cardProduct-actions {
     gap: 5rem;
     justify-content: flex-end;
     padding: 0 5rem;
