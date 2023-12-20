@@ -19,16 +19,16 @@ const itemSlice = createSlice({
       state.push({ ...payload, id: uuid() })
     },
     updateItem: (state, { payload }) => {
-      const index = state.findIndex(item => item.id === payload.itemID);
-      Object.assign(state[index], payload.item);
-
-      // state.map(item => {
-      //   if (item.id === payload.itemID) Object.assign(item, payload.item)
-      //   return item
-      // })
+      const index = state.findIndex(item => item.id === payload.id)
+      Object.assign(state[index], payload.item)
+    },
+    deleteItem: (state, { payload }) => {
+      const index = state.findIndex(item => item.id === payload)
+      state.splice(index, 1)
     },
   },
 })
 
-export const { changeFavorite, createItem, updateItem } = itemSlice.actions
+export const { changeFavorite, createItem, updateItem, deleteItem } =
+  itemSlice.actions
 export default itemSlice.reducer

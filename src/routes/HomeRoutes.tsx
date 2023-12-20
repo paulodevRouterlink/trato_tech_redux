@@ -1,7 +1,7 @@
 import { RouteObject } from 'react-router-dom'
 import { HomeLayout } from '@/layout/Home'
 import { Home } from '@/pages/Home'
-import { Advertise } from '@/pages/Advertise'
+import { Category } from '@/pages/[Category]'
 
 export const HomeRoutes: RouteObject = {
   path: '/',
@@ -12,8 +12,12 @@ export const HomeRoutes: RouteObject = {
       element: <Home />,
     },
     {
-      path: 'advertise',
-      element: <Advertise />,
+      path: 'category/:id',
+      element: <Category />,
+    },
+    {
+      path: 'category/:id',
+      element: <Category />,
     },
   ],
 }

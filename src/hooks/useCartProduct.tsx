@@ -6,7 +6,7 @@ import {
   changeQuantityAction,
   resetCart,
 } from '@/store/reducers/cart'
-import { changeFavorite } from '@/store/reducers/items'
+import { changeFavorite, deleteItem } from '@/store/reducers/items'
 
 type CartProductProps = { id?: string }
 
@@ -37,6 +37,10 @@ export const useCartProduct = ({ id }: CartProductProps) => {
     state.cart.some(item => item.id === id)
   )
 
+  const handleDelete = () => {
+    dispatch(deleteItem(id))
+  }
+
   const handleFavorite = () => {
     dispatch(changeFavorite(id))
   }
@@ -62,6 +66,7 @@ export const useCartProduct = ({ id }: CartProductProps) => {
   return {
     isCart,
     itemInCart,
+    handleDelete,
     handleFavorite,
     handleAddToCart,
     incrementQuantity,
