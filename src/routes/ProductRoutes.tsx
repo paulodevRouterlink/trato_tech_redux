@@ -7,6 +7,7 @@ import { Advertise } from '@/pages/Advertise'
 export const ProductRoutes: RouteObject = {
   path: '/',
   element: <ProductLayout />,
+  errorElement: <h1>not found</h1>,
   children: [
     {
       path: 'cart',
