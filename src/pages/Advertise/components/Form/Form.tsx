@@ -62,13 +62,11 @@ export const Form = () => {
   const createdProduct = (data: SchemaFormProps) => {
     console.log({ data })
     setOutput(JSON.stringify(data, null, 2))
-
-    console.log('FORM', data)
     dispatch(createItem(data))
   }
 
   const updatedProduct = (data: SchemaFormProps) => {
-    const itemID = product.id
+    const id = product.id
     const dataItem = {
       id: product.id,
       title: data.title,
@@ -79,11 +77,9 @@ export const Form = () => {
       favorite: product.favorite,
     }
 
-    setOutput(JSON.stringify(dataItem, null, 2))
-
     console.log('data updated ==> ', dataItem)
-
-    dispatch(updateItem({ itemID, item: dataItem }))
+    setOutput(JSON.stringify(dataItem, null, 2))
+    dispatch(updateItem({ id, item: dataItem }))
   }
 
   const optionsCategory = useMemo(() => {

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { FaCartPlus } from 'react-icons/fa'
 import { FiEdit } from 'react-icons/fi'
+import { IoClose } from 'react-icons/io5'
 import {
   AiOutlineHeart,
   AiFillHeart,
@@ -34,6 +35,7 @@ export const CardProduct = ({ card, cart }: CardProductProps) => {
   const { id, title, price, description, photoUrl, favorite } = card
   const {
     isCart,
+    handleDelete,
     handleFavorite,
     handleAddToCart,
     incrementQuantity,
@@ -51,6 +53,13 @@ export const CardProduct = ({ card, cart }: CardProductProps) => {
         [styles.itemCart]: cart,
       })}
     >
+      <IoClose
+        className={classNames(styles['cardProduct-action'], {
+          [styles['cardProduct-btn--delete']]: true,
+        })}
+        onClick={handleDelete}
+      />
+
       <div className={styles['cardProduct-image']}>
         <img src={photoUrl} alt={title} />
       </div>
@@ -117,3 +126,5 @@ export const CardProduct = ({ card, cart }: CardProductProps) => {
     </article>
   )
 }
+
+// export default memo(CardProduct)
