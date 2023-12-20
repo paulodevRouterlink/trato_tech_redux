@@ -18,6 +18,7 @@ export const NavBar = () => {
       <div className={style.nav_bar__links}>
         <NavItem props={{ label: 'Pagina Inicial', path: '/' }} />
         <NavItem props={{ label: 'Anuncie', path: '/advertise' }} />
+        <NavItem props={{ label: 'Categorias', path: '/category' }} />
       </div>
 
       <div className={style.nav_bar__search}>

@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation, useParams } from 'react-router-dom'
 import { Header } from '@/components/Header'
 import { TitleWithImage } from '@/components/Header/TitleWithImage'
 
@@ -6,6 +6,7 @@ import Clock from '@/assets/inicial.png'
 
 export const HomeLayout = () => {
   const location = useLocation()
+  const params = useParams()
 
   const HeadingProps = {
     title: 'Classificados Tech',
@@ -15,7 +16,7 @@ export const HomeLayout = () => {
 
   return (
     <div>
-      {location.pathname !== '/advertise' && (
+      {location.pathname !== `/category/${params.id}` && (
         <Header props={HeadingProps}>
           <TitleWithImage
             props={HeadingProps}

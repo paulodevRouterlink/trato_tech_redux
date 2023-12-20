@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useCategories } from '@/hooks/useCategories'
 
 import styles from './styles.module.scss'
+import { AboutUs } from './components/AboutUs'
 
 export const Home = () => {
   const navigate = useNavigate()
@@ -21,6 +22,8 @@ export const Home = () => {
           </div>
         ))}
       </section>
+
+      <AboutUs />
     </main>
   )
 }
