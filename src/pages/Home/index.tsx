@@ -1,29 +1,16 @@
-import { useNavigate } from 'react-router-dom'
-import { useCategories } from '@/hooks/useCategories'
+import { AboutUs } from './components/AboutUs'
+import { CategoriesList } from '@/components/CategoriesList'
 
 import styles from './styles.module.scss'
-import { AboutUs } from './components/AboutUs'
 
-export const Home = () => {
-  const navigate = useNavigate()
-  const { CATEGORIES } = useCategories()
+export const Home = () => (
+  <main className={styles.home}>
+    <div className={styles['home-title']}>
+      <h1>Categorias</h1>
+    </div>
 
-  return (
-    <main className={styles.categories}>
-      <div className={styles['categories-title']}>
-        <h1>Categorias</h1>
-      </div>
+    <CategoriesList />
 
-      <section className={styles['categories-container']}>
-        {CATEGORIES.map(item => (
-          <div key={item.id} onClick={() => navigate(`/category/${item.id}`)}>
-            <img src={item.thumbnail} alt={item.name} />
-            <h1>{item.name}</h1>
-          </div>
-        ))}
-      </section>
-
-      <AboutUs />
-    </main>
-  )
-}
+    <AboutUs />
+  </main>
+)

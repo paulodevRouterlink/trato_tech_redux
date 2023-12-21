@@ -12,13 +12,16 @@ type CartProductProps = { id?: string }
 
 export const useCartProduct = ({ id }: CartProductProps) => {
   const dispatch = useAppDispatch()
+  const carts = useAppSelector(state => state.cart)
+  const product = useAppSelector(state => state.items)
+  const search = useAppSelector(state => state.search)
 
-  const { cart, allItem } = useAppSelector(state => {
+  const { cart, allItem } = useMemo(() => {
     let allItem = 0
-    const regexp = new RegExp(state.search, 'i')
+    const regexp = new RegExp(search, 'i')
 
-    const cartReducer: CartType[] = state.cart.reduce((items, itemCart) => {
-      const item = state.items.find(item => item.id === itemCart.id)
+    const cartReducer: CartType[] = carts.reduce((items, itemCart) => {
+      const item = product.find(item => item.id === itemCart.id)
       allItem += item!.price * itemCart.quantity
 
       if (item!.title.match(regexp)) {
@@ -29,9 +32,7 @@ export const useCartProduct = ({ id }: CartProductProps) => {
     }, [])
 
     return { cart: cartReducer, allItem }
-  })
-
-  const itemInCart = useMemo(() => ({ cart, allItem }), [cart, allItem])
+  }, [carts, search, product])
 
   const isCart = useAppSelector(state =>
     state.cart.some(item => item.id === id)
@@ -65,7 +66,8 @@ export const useCartProduct = ({ id }: CartProductProps) => {
 
   return {
     isCart,
-    itemInCart,
+    cart,
+    allItem,
     handleDelete,
     handleFavorite,
     handleAddToCart,

@@ -53,12 +53,14 @@ export const CardProduct = ({ card, cart }: CardProductProps) => {
         [styles.itemCart]: cart,
       })}
     >
-      <IoClose
-        className={classNames(styles['cardProduct-action'], {
-          [styles['cardProduct-btn--delete']]: true,
-        })}
-        onClick={handleDelete}
-      />
+      {!cart && (
+        <IoClose
+          className={classNames(styles['cardProduct-action'], {
+            [styles['cardProduct-btn--delete']]: true,
+          })}
+          onClick={handleDelete}
+        />
+      )}
 
       <div className={styles['cardProduct-image']}>
         <img src={photoUrl} alt={title} />

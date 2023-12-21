@@ -5,7 +5,7 @@ import { TitleWithImage } from '@/components/Header/TitleWithImage'
 import Clock from '@/assets/inicial.png'
 
 export const HomeLayout = () => {
-  const location = useLocation()
+  const { pathname } = useLocation()
   const params = useParams()
 
   const HeadingProps = {
@@ -14,17 +14,30 @@ export const HomeLayout = () => {
     image: Clock,
   }
 
+  const verifyPath = () => {
+    switch (pathname) {
+      case `/category/${params.id}`:
+        return null
+
+      case '/categories':
+        return <Header props={{ title: 'Categorias', description: '' }} />
+
+      default:
+        return (
+          <Header props={HeadingProps}>
+            <TitleWithImage
+              props={HeadingProps}
+              imageUrl={HeadingProps.image}
+              style={{ paddingBottom: '25rem' }}
+            />
+          </Header>
+        )
+    }
+  }
+
   return (
     <div>
-      {location.pathname !== `/category/${params.id}` && (
-        <Header props={HeadingProps}>
-          <TitleWithImage
-            props={HeadingProps}
-            imageUrl={HeadingProps.image}
-            style={{ paddingBottom: '25rem' }}
-          />
-        </Header>
-      )}
+      {verifyPath()}
 
       <Outlet />
     </div>

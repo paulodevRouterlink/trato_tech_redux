@@ -1,0 +1,36 @@
+@use '@/sass/main';
+
+.categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5rem;
+  top: calc(100% - 150px);
+  width: 90%;
+
+  > div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    cursor: pointer;
+
+    h1 {
+      color: main.$midnight-950;
+      font-size: 2.5rem;
+
+      margin-top: 2rem;
+    }
+
+    > img {
+      border-radius: 144px;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+    }
+  }
+}

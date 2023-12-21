@@ -1,0 +1,8 @@
+@use '@/sass/main';
+
+.categories_wrapper {
+  @extend .flex;
+  @extend .justify-center;
+
+  margin-block: 6rem;
+}

@@ -1,10 +1,25 @@
-import { StateProps } from '@/store'
+import { useMemo } from 'react'
+import { useParams } from 'react-router-dom'
 import { useAppSelector } from '@/store/hooks/useRedux'
-import { useSelector } from 'react-redux'
 
 export const useCategories = () => {
+  const params = useParams()
   const CATEGORIES = useAppSelector(state => state.categories)
-  const category = useSelector((state: StateProps) => state.categories)
+  const ITEMS = useAppSelector(state => state.items)
+  const search = useAppSelector(state => state.search)
 
-  return { CATEGORIES, category }
+  const { category, items } = useMemo(() => {
+    const regexp = new RegExp(search, 'i')
+
+    return {
+      category: CATEGORIES.find(category => category.id === params.id),
+      items: ITEMS.filter(
+        item => item.category === params.id && item.title.match(regexp)
+      ),
+    }
+  }, [CATEGORIES, ITEMS, search, params])
+
+  const CATEGORY = category!
+
+  return { CATEGORIES, CATEGORY, items }
 }
