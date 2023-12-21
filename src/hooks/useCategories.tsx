@@ -1,10 +1,21 @@
-import { StateProps } from '@/store'
+import { useParams } from 'react-router-dom'
 import { useAppSelector } from '@/store/hooks/useRedux'
-import { useSelector } from 'react-redux'
 
 export const useCategories = () => {
-  const CATEGORIES = useAppSelector(state => state.categories)
-  const category = useSelector((state: StateProps) => state.categories)
+  const params = useParams()
 
-  return { CATEGORIES, category }
+  const CATEGORIES = useAppSelector(state => state.categories)
+
+  const { category, items } = useAppSelector(state => {
+    const regexp = new RegExp(state.search, 'i')
+
+    return {
+      category: state.categories.find(category => category.id === params.id),
+      items: state.items.filter(
+        item => item.category === params.id && item.title.match(regexp)
+      ),
+    }
+  })
+
+  return { CATEGORIES, category, items }
 }

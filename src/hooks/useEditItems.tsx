@@ -4,11 +4,16 @@ import { useAppSelector } from '@/store/hooks/useRedux'
 export const useEditItems = () => {
   const params = useParams()
 
-  const item = useAppSelector(state =>
-    state.items.find(props => props.id === params.id)
-  )
+  const items = useAppSelector(state => state.items)
 
-  const product = item!
+  const item = items.filter(props => props.id === params.id)
+  const itemInfo = item.find(props => props.id === params.id)
 
-  return { product }
+  console.log('item ', item)
+  console.log('infoInfo ', itemInfo)
+
+  const product = itemInfo!
+  console.log('product ==> ', product)
+
+  return product
 }

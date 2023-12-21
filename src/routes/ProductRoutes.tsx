@@ -2,6 +2,7 @@ import { RouteObject } from 'react-router-dom'
 import { ProductLayout } from '@/layout/Product'
 import { Cart } from '@/pages/Cart'
 import { Advertise } from '@/pages/Advertise'
+import { ItemDetail } from '@/pages/[ItemDetail]'
 
 export const ProductRoutes: RouteObject = {
   path: '/',
@@ -18,7 +19,7 @@ export const ProductRoutes: RouteObject = {
     },
     {
       path: 'category/:id/item/:id',
-      element: <Advertise />,
+      element: <ItemDetail />,
     },
   ],
 }
