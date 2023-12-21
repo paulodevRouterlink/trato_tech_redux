@@ -1,0 +1,35 @@
+@use '@/sass/main';
+
+@mixin boxSize($size) {
+  width: #{$size}rem;
+  height: #{$size}rem;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__loader {
+    border: 0.2rem solid rgba(0, 0, 0, 0.1);
+    border-top: 0.2rem solid #626364;
+    border-radius: 50%;
+    @include boxSize(2.4);
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

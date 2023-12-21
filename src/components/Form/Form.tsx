@@ -34,13 +34,14 @@ export const Form = () => {
   const dispatch = useAppDispatch()
   const product = useEditItems()
   const params = useParams()
+  const id = Number(params.id)
 
   const formDefault: SchemaFormProps = {
-    title: params.id === product?.id ? product?.title : '',
-    description: params.id === product?.id ? product?.description : '',
-    price: params.id === product?.id ? product?.price : 0,
-    category: params.id === product?.id ? product?.category : '',
-    photoUrl: params.id === product?.id ? product?.photoUrl : '',
+    title: id === product?.id ? product?.title : '',
+    description: id === product?.id ? product?.description : '',
+    price: id === product?.id ? product?.price : 0,
+    category: id === product?.id ? product?.category : '',
+    photoUrl: id === product?.id ? product?.photoUrl : '',
   }
 
   const {

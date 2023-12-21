@@ -6,12 +6,12 @@ import styles from './styles.module.scss'
 import { useCategories } from '@/hooks/useCategories'
 
 export const Category = () => {
-  const { category, items } = useCategories()
+  const { CATEGORY, items } = useCategories()
 
   const CategoryHead = {
-    title: category!.name,
-    description: category!.description,
-    image: category!.header,
+    title: CATEGORY?.name,
+    description: CATEGORY?.description,
+    image: CATEGORY?.header,
   }
 
   return (
@@ -21,7 +21,9 @@ export const Category = () => {
       </Header>
 
       <section className={styles.items__wrapper}>
-        {items?.map(props => <CardProduct key={props.id} card={props} />)}
+        {items?.map((props, index) => (
+          <CardProduct key={`${index}${props.id}`} card={props} />
+        ))}
       </section>
     </main>
   )

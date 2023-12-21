@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { CartProps } from '@/@types/CartProps'
+import { toasts } from '@/utils/toastify'
 
 const initialState: CartProps[] = []
 
@@ -8,9 +9,13 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     changeCartAction: (state, { payload }) => {
+
       const isItem = state.some(item => item.id === payload)
 
-      if (!isItem) return [...state, { id: payload, quantity: 1 }]
+      if (!isItem) {
+        toasts.success({title: 'Item adicionado no carrinho'})
+        return [...state, { id: payload, quantity: 1 }]
+      }
 
       return state.filter(item => item.id !== payload)
     },

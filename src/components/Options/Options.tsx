@@ -9,8 +9,8 @@ type OptionsProps = {
 export const Options = ({ label, options }: OptionsProps) => (
   <>
     <option value="">{label}</option>
-    {options.map(props => (
-      <option key={props.id} value={props.id}>
+    {options.map((props, index) => (
+      <option key={`${index}${props.id}`} value={props.id}>
         {props.name}
       </option>
     ))}
