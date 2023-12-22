@@ -5,7 +5,8 @@ export const useEditItems = () => {
   const params = useParams()
   const items = useAppSelector(state => state.items)
   const item = items.find(item => item.id === Number(params.id))
+
   const product = item!
 
-  return product
+  return { product, item }
 }

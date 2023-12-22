@@ -2,8 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCategories } from '@/hooks/useCategories'
 import { useAppDispatch } from '@/store/hooks/useRedux'
-import { fetchCategories } from '@/store/reducers/categories'
-import { fetchItems } from '@/store/reducers/items'
+import { loadCategories } from '@/store/reducers/categories'
 import styles from './styles.module.scss'
 
 export const CategoriesList = () => {
@@ -12,8 +11,7 @@ export const CategoriesList = () => {
   const { CATEGORIES } = useCategories()
 
   useEffect(() => {
-    dispatch(fetchItems())
-    dispatch(fetchCategories())
+    dispatch(loadCategories())
   }, [dispatch])
 
   return (

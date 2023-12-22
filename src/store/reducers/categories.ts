@@ -1,9 +1,14 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { CategoryProps } from '@/@types/CategoryProps'
 import categoriesService from '@/services/categoriesService'
 import { toasts } from '@/utils/toastify'
+import { resetCart } from './cart'
 
 const initialState: CategoryProps[] = []
+
+const loadCategories = createAction('categories/loadCategories')
+const loadOneCategory = createAction('categories/loadOneCategory')
 
 const fetchCategories = createAsyncThunk(
   'categories/get',
@@ -13,28 +18,23 @@ const fetchCategories = createAsyncThunk(
 const categoriesSlice = createSlice({
   name: 'categories',
   initialState,
-  reducers: {},
+  reducers: {
+    addAllCategories: (_, { payload }) => {
+      return payload
+    },
+    addOneCategories: (state, { payload }) => {
+      state.push(payload)
+    },
+  },
   extraReducers: builder => {
-    builder
-      .addCase(fetchCategories.fulfilled, (_, { payload }) => {
-        toasts.success({title: 'Categorias carregadas!'})
-        return payload
-      })
-      .addCase(fetchCategories.pending, (state, { payload }) => {
-        console.log('loading categories')
-        toasts.loader({title: 'Carregando'})
-        console.log('State', state)
-        console.log('Payload', payload)
-      })
-      .addCase(fetchCategories.rejected, (state, { payload }) => {
-        console.log('error loading categories')
-        toasts.error({ title: 'Falha no carregamento!' })
-        console.log('State', state)
-        console.log('Payload', payload)
-      })
+    builder.addCase(resetCart.type, () => {
+      toasts.success({ title: 'Compra finalizada!' })
+    })
   },
 })
 
-export { fetchCategories }
+export const { addAllCategories, addOneCategories } = categoriesSlice.actions
+
+export { fetchCategories, loadCategories, loadOneCategory }
 
 export default categoriesSlice.reducer

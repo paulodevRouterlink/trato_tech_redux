@@ -3,6 +3,8 @@ import categoriesReducer from './reducers/categories'
 import itemsReducer from './reducers/items'
 import cartReducer from './reducers/cart'
 import searchReducer from './reducers/search'
+import listenerCategories from './middlewares/categoriesListener'
+import listenerItems from './middlewares/itemsListener'
 
 const store = configureStore({
   reducer: {
@@ -11,6 +13,11 @@ const store = configureStore({
     categories: categoriesReducer,
     search: searchReducer,
   },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().prepend(
+      listenerItems.middleware,
+      listenerCategories.middleware
+    ),
 })
 
 export default store

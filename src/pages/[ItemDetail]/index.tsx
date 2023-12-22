@@ -8,7 +8,7 @@ import { useEditItems } from '@/hooks/useEditItems'
 import styles from './styles.module.scss'
 
 export const ItemDetail = () => {
-  const product = useEditItems()
+  const { product } = useEditItems()
   const navigate = useNavigate()
 
   return (

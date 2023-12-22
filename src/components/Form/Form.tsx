@@ -1,12 +1,12 @@
-import { useMemo, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+import { useLocation, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Button } from '@/components/Button'
 import { useCategories } from '@/hooks/useCategories'
 import { useAppDispatch } from '@/store/hooks/useRedux'
-import { createItem, updateItem } from '@/store/reducers/items'
+import { createItem, fetchItems, updateItem } from '@/store/reducers/items'
 import { useEditItems } from '@/hooks/useEditItems'
 import styles from './styles.module.scss'
 import { InputField } from '../InputField'
@@ -31,18 +31,32 @@ type SchemaFormProps = z.infer<typeof schema>
 export const Form = () => {
   const [output, setOutput] = useState('')
   const { CATEGORIES } = useCategories()
+  const { item } = useEditItems()
+  const { pathname } = useLocation()
   const dispatch = useAppDispatch()
-  const product = useEditItems()
   const params = useParams()
   const id = Number(params.id)
+  const path = pathname === `/category/${item?.category}/item/${params.id}`
+
+  console.log('ID ==> ', id)
+  console.log('ITEM id ==> ', item?.id)
+  console.log('ITEM ==> ', item)
+
+  useEffect(() => {
+    if (path) {
+      dispatch(fetchItems())
+    }
+  }, [dispatch, path])
 
   const formDefault: SchemaFormProps = {
-    title: id === product?.id ? product?.title : '',
-    description: id === product?.id ? product?.description : '',
-    price: id === product?.id ? product?.price : 0,
-    category: id === product?.id ? product?.category : '',
-    photoUrl: id === product?.id ? product?.photoUrl : '',
+    title: item?.id === id ? item?.title : '',
+    description: item?.id === id ? item?.description : '',
+    price: item?.id === id ? item?.price : 0,
+    category: item?.id === id ? item?.category : '',
+    photoUrl: item?.id === id ? item?.photoUrl : '',
   }
+
+  console.log('FORM ==> ', formDefault)
 
   const {
     register,
@@ -66,15 +80,15 @@ export const Form = () => {
   }
 
   const updatedProduct = (data: SchemaFormProps) => {
-    const id = product.id
+    const id = item?.id
     const dataItem = {
-      id: product.id,
+      id: item?.id,
       title: data.title,
       description: data.description,
       price: data.price,
       category: data.category,
-      photoUrl: product.photoUrl,
-      favorite: product.favorite,
+      photoUrl: item?.photoUrl,
+      favorite: item?.favorite,
     }
 
     console.log('data updated ==> ', dataItem)
@@ -91,7 +105,7 @@ export const Form = () => {
     return data
   }, [CATEGORIES])
 
-  const isEditItem = params.id
+  const isEditItem = path
     ? handleSubmit(updatedProduct)
     : handleSubmit(createdProduct)
 
