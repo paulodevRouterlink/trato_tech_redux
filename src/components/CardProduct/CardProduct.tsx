@@ -10,7 +10,7 @@ import {
 } from 'react-icons/ai'
 import classNames from 'classnames'
 
-import { COLORS } from '@/styles/colors'
+import { COLORS } from '@/theme/colors'
 import { ItemProps } from '@/@types/ItemsProps'
 import { CartType } from '@/@types/CartProps'
 import { useCartProduct } from '@/hooks/useCartProduct'

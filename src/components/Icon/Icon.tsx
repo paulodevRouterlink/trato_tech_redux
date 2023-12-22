@@ -1,5 +1,5 @@
 import { ElementType } from 'react'
-import { COLORS } from '@/styles/colors'
+import { COLORS } from '@/theme/colors'
 
 type IconProps = {
   icon: ElementType
