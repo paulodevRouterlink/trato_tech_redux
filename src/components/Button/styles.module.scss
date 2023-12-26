@@ -32,4 +32,9 @@ $button-color: main.$midnight-700;
     transform: translateY(2px);
     box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.35);
   }
+
+  &:disabled {
+    background: main.$masala-500;
+    opacity: 0.5;
+  }
 }

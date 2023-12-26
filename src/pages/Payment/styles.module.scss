@@ -6,15 +6,7 @@
   flex-direction: column;
 }
 
-.form-title {
-  text-align: center;
-  font-size: 2rem;
-  width: 100%;
-
-  margin-bottom: 0.75rem;
-}
-
-.form-group {
+.form {
   align-items: flex-start;
   display: flex;
   flex: 1;
@@ -31,25 +23,39 @@
   input {
     width: 100%;
   }
-}
 
-.content {
-  align-items: flex-start;
-  background-color: main.$alice-blue-50;
-  border-radius: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  justify-content: center;
-  margin: 3rem 0;
-  padding: 2rem;
-  width: 100%;
-
-  > p {
-    font-size: 2rem;
+  form {
+    width: 100%;
   }
-}
 
-.finished {
-  margin: 0 auto;
+  &-title {
+    text-align: center;
+    font-size: 2rem;
+    width: 100%;
+
+    margin-bottom: 0.75rem;
+  }
+
+  &-content {
+    align-items: flex-start;
+    background-color: main.$alice-blue-50;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    justify-content: center;
+    margin: 3rem 0;
+    padding: 2rem;
+    width: 100%;
+
+    > p {
+      font-size: 2rem;
+      font-weight: main.$fw_medium;
+    }
+  }
+
+  &-finished {
+    text-align: center;
+    margin: 0 auto;
+  }
 }

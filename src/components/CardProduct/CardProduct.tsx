@@ -32,7 +32,8 @@ type CardProductProps = {
 }
 
 export const CardProduct = ({ card, cart }: CardProductProps) => {
-  const { id, title, price, description, photoUrl, favorite } = card
+  const { id: ID, title, price, description, photoUrl, favorite } = card
+  const id = String(ID)
   const {
     isCart,
     handleDelete,

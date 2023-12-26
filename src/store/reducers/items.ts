@@ -5,13 +5,11 @@ import { ItemProps } from '@/@types/ItemsProps'
 import itemsService from '@/services/itemsService'
 import { toasts } from '@/utils/toastify'
 
-const initialState: ItemProps[] = []
-
 const fetchItems = createAsyncThunk('items/get', itemsService.get)
 
 const itemSlice = createSlice({
   name: 'items',
-  initialState,
+  initialState: [] as ItemProps[],
   reducers: {
     changeFavorite: (state, { payload }) => {
       state.map(item => {

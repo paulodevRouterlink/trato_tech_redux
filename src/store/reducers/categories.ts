@@ -4,8 +4,6 @@ import { CategoryProps } from '@/@types/CategoryProps'
 import categoriesService from '@/services/categoriesService'
 import { resetCart } from './cart'
 
-const initialState: CategoryProps[] = []
-
 const loadCategories = createAction('categories/loadCategories')
 const loadOneCategory = createAction('categories/loadOneCategory')
 
@@ -16,7 +14,7 @@ const fetchCategories = createAsyncThunk(
 
 const categoriesSlice = createSlice({
   name: 'categories',
-  initialState,
+  initialState: [] as CategoryProps[],
   reducers: {
     addAllCategories: (_, { payload }) => {
       return payload

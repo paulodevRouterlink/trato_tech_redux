@@ -2,12 +2,12 @@ import { configureStore } from '@reduxjs/toolkit'
 import createSagaMiddleware from 'redux-saga'
 import categoriesReducer from './reducers/categories'
 import itemsReducer from './reducers/items'
+import userReducer from './reducers/user'
 import cartReducer from './reducers/cart'
 import searchReducer from './reducers/search'
 import listenerItems from './middlewares/itemsListener'
 import listenerCategories from './middlewares/categoriesListener'
-import { categoriesSaga } from './saga/sagaCategories'
-import { cartSaga } from './saga/sagaCart'
+import { rootSaga } from './saga/rootSaga'
 
 /**
  * FIX: Corrigir o bug do sagaMiddleware ao integrar ele com o middleware do store
@@ -21,6 +21,7 @@ const store = configureStore({
     items: itemsReducer,
     categories: categoriesReducer,
     search: searchReducer,
+    user: userReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware()
@@ -28,8 +29,7 @@ const store = configureStore({
       .concat(sagaMiddleware),
 })
 
-sagaMiddleware.run(categoriesSaga)
-sagaMiddleware.run(cartSaga)
+sagaMiddleware.run(rootSaga)
 
 export default store
 
