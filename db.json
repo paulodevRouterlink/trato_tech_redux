@@ -262,5 +262,76 @@
       "price": 782.91,
       "category": "som"
     }
+  ],
+  "user": [
+    {
+      "id": 1,
+      "name": "João"
+    },
+    {
+      "id": 2,
+      "name": "Maria"
+    }
+  ],
+  "cards": [
+    {
+      "name": "Cartão da Maria 1",
+      "flagId": 10,
+      "balance": 300,
+      "userId": 2,
+      "id": "1"
+    },
+    {
+      "name": "Cartão da Maria 2",
+      "flagId": 20,
+      "balance": 500,
+      "userId": 2,
+      "id": "2"
+    },
+    {
+      "name": "Cartão da Maria 3",
+      "flagId": 30,
+      "balance": 1000,
+      "userId": 2,
+      "id": "3"
+    },
+    {
+      "name": "Cartão do João 1",
+      "flagId": 10,
+      "balance": 0,
+      "userId": 1,
+      "id": "4"
+    },
+    {
+      "name": "Cartão do João 2",
+      "flagId": 20,
+      "balance": 200,
+      "userId": 1,
+      "id": "5"
+    },
+    {
+      "name": "Cartão do João 3",
+      "flagId": 30,
+      "balance": 500,
+      "userId": 1,
+      "id": "6"
+    }
+  ],
+  "flags": [
+    {
+      "name": "Verde",
+      "id": 10,
+      "rate": 1.1
+    },
+    {
+      "name": "Vermelho",
+      "id": 20,
+      "rate": 1.3
+    },
+    {
+      "name": "Amarela",
+      "id": 30,
+      "rate": 1.5
+    }
   ]
 }
