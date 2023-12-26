@@ -2,31 +2,16 @@ import { useEffect, useMemo, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 import { Button } from '@/components/Button'
 import { useCategories } from '@/hooks/useCategories'
 import { useAppDispatch } from '@/store/hooks/useRedux'
 import { createItem, fetchItems, updateItem } from '@/store/reducers/items'
 import { useEditItems } from '@/hooks/useEditItems'
-import styles from './styles.module.scss'
 import { InputField } from '../InputField'
 import { SelectField } from '../SelectField'
 import { Options } from '../Options'
-
-const schema = z.object({
-  title: z.string().min(4, 'Digite o nome do produto'),
-  description: z.string().min(15, 'Digite a descrição do produto'),
-  photoUrl: z.string().min(2, 'Digite uma URL válida'),
-  category: z.string().nonempty('Selecione uma categoria válida'),
-  price: z
-    .number({
-      required_error: 'Digite o preço',
-      invalid_type_error: 'Digite o preço do produto',
-    })
-    .positive('Por favor digite um preço válido'),
-})
-
-type SchemaFormProps = z.infer<typeof schema>
+import { SchemaFormProps, schemaForm } from '@/schemas/SchemaForm'
+import styles from './styles.module.scss'
 
 export const Form = () => {
   const [output, setOutput] = useState('')
@@ -37,10 +22,6 @@ export const Form = () => {
   const params = useParams()
   const id = Number(params.id)
   const path = pathname === `/category/${item?.category}/item/${params.id}`
-
-  console.log('ID ==> ', id)
-  console.log('ITEM id ==> ', item?.id)
-  console.log('ITEM ==> ', item)
 
   useEffect(() => {
     if (path) {
@@ -56,14 +37,12 @@ export const Form = () => {
     photoUrl: item?.id === id ? item?.photoUrl : '',
   }
 
-  console.log('FORM ==> ', formDefault)
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SchemaFormProps>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schemaForm),
     defaultValues: {
       title: formDefault.title,
       description: formDefault.description,
@@ -112,46 +91,38 @@ export const Form = () => {
   return (
     <>
       <form className={styles.form} onSubmit={isEditItem}>
-        <InputField errors={errors.title?.message}>
-          <input
-            {...register('title')}
-            type="text"
-            placeholder="Nome do produto"
-          />
-        </InputField>
-
-        <InputField errors={errors.description?.message}>
-          <input
-            {...register('description')}
-            type="text"
-            placeholder="Descrição do produto"
-          />
-        </InputField>
-
-        <InputField errors={errors.photoUrl?.message}>
-          <input
-            {...register('photoUrl')}
-            type="text"
-            placeholder="URL da imagem do produto"
-            disabled={!!formDefault.photoUrl}
-          />
-        </InputField>
-
-        <InputField errors={errors.price?.message}>
-          <input
-            {...register('price', {
-              required: 'Este campo é obrigatório',
-              min: {
-                value: 1,
-                message: 'O preço deve ser maior que 1',
-              },
-              valueAsNumber: true,
-            })}
-            type="number"
-            placeholder="Preço do produto"
-            min={0}
-          />
-        </InputField>
+        <InputField
+          {...register('title')}
+          type="text"
+          placeholder="Nome do produto"
+          errors={errors.title?.message}
+        />
+        <InputField
+          {...register('description')}
+          type="text"
+          placeholder="Descrição do produto"
+          errors={errors.description?.message}
+        />
+        <InputField
+          {...register('photoUrl')}
+          type="text"
+          placeholder="URL da imagem do produto"
+          errors={errors.photoUrl?.message}
+        />
+        <InputField
+          {...register('price', {
+            required: 'Este campo é obrigatório',
+            min: {
+              value: 1,
+              message: 'O preço deve ser maior que 1',
+            },
+            valueAsNumber: true,
+          })}
+          type="number"
+          placeholder="Preço do produto"
+          min={0}
+          errors={errors.price?.message}
+        />
 
         <SelectField errors={errors.category?.message}>
           <select {...register('category')}>

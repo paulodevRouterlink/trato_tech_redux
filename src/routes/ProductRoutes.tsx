@@ -3,6 +3,7 @@ import { ProductLayout } from '@/layout/Product'
 import { Cart } from '@/pages/Cart'
 import { Advertise } from '@/pages/Advertise'
 import { ItemDetail } from '@/pages/[ItemDetail]'
+import { Payment } from '@/pages/Payment'
 
 export const ProductRoutes: RouteObject = {
   path: '/',
@@ -20,6 +21,10 @@ export const ProductRoutes: RouteObject = {
     {
       path: 'category/:id/item/:id',
       element: <ItemDetail />,
+    },
+    {
+      path: 'payment',
+      element: <Payment />,
     },
   ],
 }

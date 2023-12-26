@@ -18,7 +18,6 @@ const itemSlice = createSlice({
         if (item.id === payload) item.favorite = !item.favorite
         return item
       })
-      toasts.success({ title: 'Item adicionado nos favoritos' })
     },
     createItem: (state, { payload }) => {
       state.push({ ...payload, id: uuid() })

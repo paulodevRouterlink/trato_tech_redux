@@ -1,6 +1,6 @@
 @use '@/sass/main';
 
-$size-select-icon: 3.4rem;
+$size-select-icon: 3.7rem;
 
 @mixin fonts-select {
   font-family: main.$font_montserrat;
@@ -35,6 +35,8 @@ $size-select-icon: 3.4rem;
     height: $size-select-icon;
     appearance: none;
 
+    color: main.$masala-500;
+
     outline: 0.2rem solid transparent;
 
     @include fonts-select;
@@ -52,4 +54,8 @@ $size-select-icon: 3.4rem;
 
 .select-error {
   border: 0.2rem solid main.$red-600;
+
+  select {
+    color: main.$red-600;
+  }
 }

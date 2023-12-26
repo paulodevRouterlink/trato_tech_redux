@@ -4,9 +4,11 @@ import { Button } from '@/components/Button'
 import { useCartProduct } from '@/hooks/useCartProduct'
 
 import styles from './styles.module.scss'
+import { useNavigate } from 'react-router-dom'
 
 export const Cart = () => {
-  const { handleResetCart, cart, allItem } = useCartProduct({})
+  const { cart, allItem } = useCartProduct({})
+  const navigate = useNavigate()
 
   return (
     <div>
@@ -30,7 +32,7 @@ export const Cart = () => {
         </div>
         <Button
           props={{ label: 'Finalizar compra' }}
-          onClick={handleResetCart}
+          onClick={() => navigate('/payment')}
         />
       </section>
     </div>

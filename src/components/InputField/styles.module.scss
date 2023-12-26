@@ -44,5 +44,10 @@
 .input-error {
   input {
     outline: 0.2rem solid main.$red-600;
+
+    &::placeholder {
+      @include fonts;
+      color: main.$red-600;
+    }
   }
 }

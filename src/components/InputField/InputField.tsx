@@ -1,20 +1,22 @@
-import { ReactNode } from 'react'
+import { InputHTMLAttributes } from 'react'
 import classNames from 'classnames'
 import { Alert } from '@/components/Alert'
 import styles from './styles.module.scss'
 
-type InputFieldProps = {
+type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   errors: string | undefined
-  children: ReactNode
 }
 
-export const InputField = ({ children, errors }: InputFieldProps) => (
-  <div
-    className={classNames(styles['input-field'], {
-      [styles['input-error']]: errors,
-    })}
-  >
-    {children}
-    {errors && <Alert props={{ error: errors }} />}
-  </div>
-)
+export const InputField = ({ errors, ...props }: InputFieldProps) => {
+  return (
+    <div
+      className={classNames(styles['input-field'], {
+        [styles['input-error']]: errors,
+      })}
+    >
+      <input {...props} />
+
+      {errors && <Alert props={{ error: errors }} />}
+    </div>
+  )
+}

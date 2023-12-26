@@ -1,36 +1,10 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit'
-import {
-  addAllCategories,
-  addOneCategories,
-  loadCategories,
-  loadOneCategory,
-} from '../reducers/categories'
+import { addOneCategories, loadOneCategory } from '../reducers/categories'
 import categoriesService from '@/services/categoriesService'
 import createTask from './utils/createTask'
 import { StateProps } from '../index'
 
 const listenerCategories = createListenerMiddleware()
-
-listenerCategories.startListening({
-  actionCreator: loadCategories,
-  effect: async (_, { dispatch, fork, unsubscribe }) => {
-    const response = await createTask({
-      fork,
-      dispatch,
-      action: addAllCategories,
-      fetch: categoriesService.get,
-      toastProps: {
-        textSuccess: 'Success',
-        textLoad: 'Loading',
-        textError: 'Error',
-      },
-    })
-
-    if (response.status === 'ok') {
-      unsubscribe()
-    }
-  },
-})
 
 listenerCategories.startListening({
   actionCreator: loadOneCategory,

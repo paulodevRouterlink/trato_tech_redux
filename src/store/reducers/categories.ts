@@ -2,7 +2,6 @@
 import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { CategoryProps } from '@/@types/CategoryProps'
 import categoriesService from '@/services/categoriesService'
-import { toasts } from '@/utils/toastify'
 import { resetCart } from './cart'
 
 const initialState: CategoryProps[] = []
@@ -27,9 +26,7 @@ const categoriesSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(resetCart.type, () => {
-      toasts.success({ title: 'Compra finalizada!' })
-    })
+    builder.addCase(resetCart.type, () => {})
   },
 })
 
