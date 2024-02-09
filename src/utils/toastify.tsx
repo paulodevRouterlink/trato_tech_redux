@@ -6,6 +6,7 @@ type ToastifyProps = {
 }
 
 export const toasts = {
+  info: ({ title }: ToastifyProps) => toast.info(title),
   success: ({ title }: ToastifyProps) => toast.success(title),
   warn: ({ title }: ToastifyProps) => toast.warn(title),
   error: ({ title }: ToastifyProps) => toast.error(title),

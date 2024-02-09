@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -35,29 +35,34 @@ export const Form = () => {
   const product = useEditItems()
   const params = useParams()
   const id = Number(params.id)
+  const disabledPhotoUrl = id === product?.id ? product?.photoUrl : ''
 
-  const formDefault: SchemaFormProps = {
-    title: id === product?.id ? product?.title : '',
-    description: id === product?.id ? product?.description : '',
-    price: id === product?.id ? product?.price : 0,
-    category: id === product?.id ? product?.category : '',
-    photoUrl: id === product?.id ? product?.photoUrl : '',
-  }
 
   const {
+    setValue,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SchemaFormProps>({
     resolver: zodResolver(schema),
-    defaultValues: {
-      title: formDefault.title,
-      description: formDefault.description,
-      price: formDefault.price,
-      category: formDefault.category,
-      photoUrl: formDefault.photoUrl,
-    },
   })
+
+  useEffect(() => {
+    const formDefault: SchemaFormProps = {
+      title: id === product?.id ? product?.title : '',
+      description: id === product?.id ? product?.description : '',
+      price: id === product?.id ? product?.price : 0,
+      category: id === product?.id ? product?.category : '',
+      photoUrl: id === product?.id ? product?.photoUrl : '',
+    }
+
+
+    setValue('title', formDefault.title)
+    setValue('description', formDefault.description)
+    setValue('price', formDefault.price)
+    setValue('photoUrl', formDefault.photoUrl)
+    setValue('category', formDefault.category)
+  }, [setValue, id, product])
 
   const createdProduct = (data: SchemaFormProps) => {
     console.log({ data })
@@ -119,7 +124,7 @@ export const Form = () => {
             {...register('photoUrl')}
             type="text"
             placeholder="URL da imagem do produto"
-            disabled={!!formDefault.photoUrl}
+            disabled={!!disabledPhotoUrl}
           />
         </InputField>
 

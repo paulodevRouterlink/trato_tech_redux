@@ -14,31 +14,33 @@ const itemSlice = createSlice({
   reducers: {
     changeFavorite: (state, { payload }) => {
       state.map(item => {
-        if (item.id === payload) item.favorite = !item.favorite
+        if (item.id === payload) {
+          toasts.info({ title: 'Item favoritado' })
+          return (item.favorite = !item.favorite)
+        }
         return item
       })
-      toasts.success({title: 'Item adicionado nos favoritos'})
     },
     createItem: (state, { payload }) => {
       state.push({ ...payload, id: uuid() })
-      toasts.success({title: 'Item criado com sucesso'})
+      toasts.success({ title: 'Item criado com sucesso' })
     },
     updateItem: (state, { payload }) => {
       const index = state.findIndex(item => item.id === payload.id)
       Object.assign(state[index], payload.item)
-      toasts.success({title: 'Item atualizado com sucesso'})
+      toasts.success({ title: 'Item atualizado com sucesso' })
     },
     deleteItem: (state, { payload }) => {
       const index = state.findIndex(item => item.id === payload)
       state.splice(index, 1)
-      toasts.success({title: 'Item deletado com sucesso'})
+      toasts.success({ title: 'Item deletado com sucesso' })
     },
   },
   extraReducers: builder => {
     builder
       .addCase(fetchItems.fulfilled, (_, { payload }) => {
         console.log('items', payload)
-        console.log('loaded items' )
+        console.log('loaded items')
         return payload
       })
       .addCase(fetchItems.pending, (state, { payload }) => {
