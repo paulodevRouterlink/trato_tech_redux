@@ -1,8 +1,8 @@
-import { Footer } from '@/components/Footer'
-import { NavBar } from '@/components/NavBar'
 import { MappedRoutes } from '@/routes/routes'
-import { ScrollTop } from './components/ScrollTop'
-import styles from '@/sass/App/App.module.scss'
+import { ScrollTop } from './components'
+import { Footer, NavBar } from './components/layout'
+
+import styles from '@/sass/app.module.scss'
 
 export const App = () => (
   <div className={styles.container}>

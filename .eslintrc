@@ -1,0 +1,32 @@
+{
+  "plugins": [
+    "unused-imports"
+  ],
+  "extends": [
+    "@rocketseat/eslint-config/react"
+  ],
+  "rules": {
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "no-unused-vars": "off", // or "@typescript-eslint/no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "semi": [
+      "off",
+      "always"
+    ],
+    "quotes": [
+      "off",
+      "single"
+    ]
+  }
+}

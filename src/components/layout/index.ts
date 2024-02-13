@@ -1,0 +1,6 @@
+export * from './navbar/navbar'
+export * from './footer/footer'
+export * from './header/header'
+export * from './card-product/card-product'
+export * from './card-product/card'
+export * from './categories-list/categories-list'

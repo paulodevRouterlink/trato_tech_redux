@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter as AppRoutes } from 'react-router-dom'
 import { Provider as ReduxProvider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
+import { store } from './store'
 import { App } from './App'
-import store from './store'
 import 'react-toastify/dist/ReactToastify.css'
 import './styles/toastify.css'
 import './sass/global.scss'
@@ -15,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <AppRoutes basename="/">
         <App />
         <ToastContainer
+          position="bottom-center"
           autoClose={5000}
           hideProgressBar={false}
           newestOnTop={false}

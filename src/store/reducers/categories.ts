@@ -1,40 +1,32 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { CategoryProps } from '@/@types/CategoryProps'
-import categoriesService from '@/services/categoriesService'
-import { toasts } from '@/utils/toastify'
-
-const initialState: CategoryProps[] = []
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { resetCart } from './cart'
+import { CategoryProps } from '@/components/types/category-props'
+import categoriesService from '@/services/categories-service'
 
 const fetchCategories = createAsyncThunk(
   'categories/get',
-  categoriesService.get
+  categoriesService.get,
 )
 
 const categoriesSlice = createSlice({
   name: 'categories',
-  initialState,
-  reducers: {},
-  extraReducers: builder => {
-    builder
-      .addCase(fetchCategories.fulfilled, (_, { payload }) => {
-        toasts.success({title: 'Categorias carregadas!'})
-        return payload
-      })
-      .addCase(fetchCategories.pending, (state, { payload }) => {
-        console.log('loading categories')
-        toasts.loader({title: 'Carregando'})
-        console.log('State', state)
-        console.log('Payload', payload)
-      })
-      .addCase(fetchCategories.rejected, (state, { payload }) => {
-        console.log('error loading categories')
-        toasts.error({ title: 'Falha no carregamento!' })
-        console.log('State', state)
-        console.log('Payload', payload)
-      })
+  initialState: [] as CategoryProps[],
+  reducers: {
+    addAllCategories: (_, { payload }: PayloadAction<CategoryProps[]>) => {
+      return payload
+    },
+    addOneCategories: (state, { payload }: PayloadAction<CategoryProps>) => {
+      state.push(payload)
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(resetCart.type, () => {
+      console.log('Carrinho resetado!')
+    })
   },
 })
 
 export { fetchCategories }
-
-export default categoriesSlice.reducer
+export const { addAllCategories, addOneCategories } = categoriesSlice.actions
+export const categoriesReducer = categoriesSlice.reducer

@@ -1,64 +1,64 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { v4 as uuid } from 'uuid'
-import { ItemProps } from '@/@types/ItemsProps'
-import itemsService from '@/services/itemsService'
-import { toasts } from '@/utils/toastify'
+import { toasts } from '@/components/ui/toastify/toastify'
+import { ItemProps } from '@/components/types/items-props'
+import itemsService from '@/services/items-service'
 
-const initialState: ItemProps[] = []
+type CreateItemProps = Omit<ItemProps, 'id'>
 
 const fetchItems = createAsyncThunk('items/get', itemsService.get)
 
 const itemSlice = createSlice({
   name: 'items',
-  initialState,
+  initialState: [] as ItemProps[],
   reducers: {
-    changeFavorite: (state, { payload }) => {
-      state.map(item => {
-        if (item.id === payload) {
+    favoriteItem: (state, { payload }: PayloadAction<{ id: string }>) => {
+      state.map((item) => {
+        if (item.id === payload.id) {
           toasts.info({ title: 'Item favoritado' })
           return (item.favorite = !item.favorite)
         }
         return item
       })
     },
-    createItem: (state, { payload }) => {
-      state.push({ ...payload, id: uuid() })
+    createItem: (state, { payload }: PayloadAction<CreateItemProps>) => {
+      const items = {
+        id: uuid(),
+        ...payload,
+      }
+
+      state.push({ ...items })
       toasts.success({ title: 'Item criado com sucesso' })
     },
-    updateItem: (state, { payload }) => {
-      const index = state.findIndex(item => item.id === payload.id)
-      Object.assign(state[index], payload.item)
+    updateItem: (state, { payload }: PayloadAction<ItemProps>) => {
+      const index = state.findIndex((item) => item.id === payload.id)
+      Object.assign(state[index], payload)
       toasts.success({ title: 'Item atualizado com sucesso' })
     },
-    deleteItem: (state, { payload }) => {
-      const index = state.findIndex(item => item.id === payload)
+    deleteItem: (state, { payload }: PayloadAction<{ id: string }>) => {
+      const index = state.findIndex((item) => item.id === payload.id)
       state.splice(index, 1)
       toasts.success({ title: 'Item deletado com sucesso' })
     },
+    addItemsByCategory: (state, { payload }) => {
+      state.push(...payload)
+    },
   },
-  extraReducers: builder => {
-    builder
-      .addCase(fetchItems.fulfilled, (_, { payload }) => {
-        console.log('items', payload)
-        console.log('loaded items')
-        return payload
-      })
-      .addCase(fetchItems.pending, (state, { payload }) => {
-        console.log('loading items')
-        console.log('State', state)
-        console.log('Payload', payload)
-      })
-      .addCase(fetchItems.rejected, (state, { payload }) => {
-        console.log('error loading items')
-        console.log('State', state)
-        console.log('Payload', payload)
-      })
+  extraReducers: (builder) => {
+    builder.addCase(fetchItems.fulfilled, (_, { payload }) => {
+      return payload
+    })
   },
 })
 
 export { fetchItems }
 
-export const { changeFavorite, createItem, updateItem, deleteItem } =
-  itemSlice.actions
+export const {
+  favoriteItem,
+  createItem,
+  updateItem,
+  deleteItem,
+  addItemsByCategory,
+} = itemSlice.actions
 
-export default itemSlice.reducer
+export const itemsReducer = itemSlice.reducer

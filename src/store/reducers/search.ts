@@ -1,16 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 const initialState: string = ''
 
 const searchSlice = createSlice({
   name: 'search',
-  initialState,
+  initialState: '' as string,
   reducers: {
-    changeSearchingAction: (_state, { payload }) => payload,
+    changeSearchingAction: (_state, { payload }: PayloadAction<string>) =>
+      payload,
     resetSearching: () => initialState,
   },
 })
 
 export const { resetSearching, changeSearchingAction } = searchSlice.actions
 
-export default searchSlice.reducer
+export const searchReducer = searchSlice.reducer

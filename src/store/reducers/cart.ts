@@ -1,33 +1,53 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { CartProps } from '@/@types/CartProps'
-import { toasts } from '@/utils/toastify'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { CartProps } from '@/components/types/cart-props'
+import { toasts } from '@/components/ui'
 
-const initialState: CartProps[] = []
+type CartQuantityProps = {
+  id: string
+  quantity: number
+}
+
+const INITIAL_STATE: CartProps = { itemsCart: [], totalPrice: 0 }
 
 const cartSlice = createSlice({
   name: 'cart',
-  initialState,
+  initialState: INITIAL_STATE,
   reducers: {
-    changeCartAction: (state, { payload }) => {
-      const isItem = state.some(item => item.id === payload)
+    changeCart: (state, { payload }: PayloadAction<{ id: string }>) => {
+      const isItem = state.itemsCart.some((item) => item.id === payload.id)
 
       if (!isItem) {
-        toasts.info({ title: 'Item adicionado no carrinho' })
-        return [...state, { id: payload, quantity: 1 }]
+        toasts.success({ title: 'Item adicionado no carrinho' })
+
+        const cart = {
+          id: payload.id,
+          quantity: 1,
+        }
+
+        return {
+          totalPrice: state.totalPrice,
+          itemsCart: [...state.itemsCart, { ...cart }],
+        }
       }
 
-      return state.filter(item => item.id !== payload)
+      return {
+        totalPrice: state.totalPrice,
+        itemsCart: state.itemsCart.filter((item) => item.id !== payload.id),
+      }
     },
-    changeQuantityAction: (state, { payload }) => {
-      state.map(itemCart => {
+    changeQuantity: (state, { payload }: PayloadAction<CartQuantityProps>) => {
+      state.itemsCart.map((itemCart) => {
         if (itemCart.id === payload.id) itemCart.quantity += payload.quantity
         return itemCart
       })
     },
-    resetCart: () => initialState,
+    changeAll: (state, { payload }: PayloadAction<number>) => {
+      state.totalPrice = payload
+    },
+    resetCart: () => INITIAL_STATE,
   },
 })
 
-export const { changeCartAction, changeQuantityAction, resetCart } =
+export const { changeCart, changeQuantity, changeAll, resetCart } =
   cartSlice.actions
-export default cartSlice.reducer
+export const cartReducer = cartSlice.reducer
