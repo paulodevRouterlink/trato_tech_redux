@@ -9,7 +9,7 @@ type IconProps = {
 export const Icon = ({ icon: Icon, size }: IconProps) => {
   const iconStyleProps = {
     color: COLORS.white[50],
-    size: size,
+    size,
   }
 
   return <Icon {...iconStyleProps} />

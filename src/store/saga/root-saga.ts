@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects'
-import { categoriesSaga } from './saga-categories'
-import { cartSaga } from './saga-cart'
+import { categoriesSaga } from '@/store/ducks/categories'
+import { cartSaga } from '@/store/ducks/cart'
 
 export function* rootSaga() {
   yield all([categoriesSaga(), cartSaga()])

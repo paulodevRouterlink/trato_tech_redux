@@ -1,11 +1,11 @@
+import { UserProps } from '@/components/types/user-props'
 import instance from '@/config/api'
 
 const userService = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  getById: async (id: any) => {
-    const resposta = await instance.get(`/user/${id}`)
+  getById: async (id: number) => {
+    const response = await instance.get<UserProps>(`/user/${id}`)
 
-    return resposta.data
+    return response.data
   },
 }
 

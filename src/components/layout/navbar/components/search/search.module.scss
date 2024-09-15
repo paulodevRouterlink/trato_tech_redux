@@ -1,0 +1,36 @@
+@use '@/sass/main';
+
+.search_field {
+  align-items: center;
+  background-color: main.$white-50;
+  border-radius: 10px;
+  display: flex;
+  padding: 12px 10px;
+  height: 4em;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+  .icon__search {
+    width: 2em;
+    height: 2em;
+  }
+
+  input {
+    flex: 1;
+    background: transparent;
+    outline: none;
+    width: 30rem;
+
+    font-family: main.$font_montserrat;
+    font-weight: main.$fw_semibold;
+    font-size: 1.6em;
+
+    color: main.$masala-800;
+
+    transition: all 0.2s ease-in-out;
+
+    &::placeholder {
+      font-family: main.$font_montserrat;
+      font-size: 1em;
+    }
+  }
+}

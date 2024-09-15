@@ -1,9 +1,11 @@
-import { Card } from '@/components/layout'
-import { ProductCartProps } from '@/components/types/cart-props'
+import { Card } from '@/components/ui'
 import { useCartProduct } from '@/hooks/useCartProduct'
+import { ItemProps } from '@/components/types'
 
 type CartItemProps = {
-  item: ProductCartProps
+  item: ItemProps & {
+    quantity: number
+  }
 }
 
 export const CartItem = ({ item }: CartItemProps) => {

@@ -1,15 +1,12 @@
-import { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useCategories } from '@/hooks/useCategories'
-import { SchemaFormProps, schemaForm } from '@/schemas/schema-form'
-import { useAppDispatch } from '@/store/hooks/useRedux'
-import { createItem } from '@/store/reducers/items'
+import { useAppDispatch, useAppSelector } from '@/store/hooks/useRedux'
+import { createItem } from '@/store/ducks/items'
+import { schemaForm, SchemaFormProps } from './schema-form-advertise'
 
 export const useFormAdvertise = () => {
-  const { CATEGORIES } = useCategories()
+  const categories = useAppSelector((state) => state.categories)
   const dispatch = useAppDispatch()
-
   const {
     register,
     handleSubmit,
@@ -21,18 +18,10 @@ export const useFormAdvertise = () => {
   })
 
   const createdProduct = (data: SchemaFormProps) => {
-    console.log({ data })
-    dispatch(createItem(data))
+    dispatch(createItem({ ...data, favorite: false }))
   }
 
-  const optionsCategory = useMemo(() => {
-    const data = CATEGORIES.map((props) => ({
-      id: props.id,
-      name: props.name,
-    }))
-
-    return data
-  }, [CATEGORIES])
+  const optionsCategory = categories.map(({ id, name }) => ({ id, name }))
 
   return {
     register,

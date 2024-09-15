@@ -1,40 +1,47 @@
-import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { useCategories } from '@/hooks/useCategories'
-import { useAppDispatch } from '@/store/hooks/useRedux'
 import { Header } from '@/components/layout'
-import { loadOneCategory } from '@/store/actions/actions'
-import styles from './category.module.scss'
+import { Loader } from '@/components/ui'
 import { CategoryItem } from './components'
+import { useCategory } from './useCategory'
+import styles from './category.module.scss'
 
 export const Category = () => {
-  const { CATEGORY, items } = useCategories()
-  const dispatch = useAppDispatch()
-  const params = useParams()
+  const { categories, loadCategory, loadProducts } = useCategory()
 
-  useEffect(() => {
-    const categoryId = params.id
-
-    dispatch(loadOneCategory(categoryId))
-  }, [dispatch, params])
-
-  const CategoryHead = {
-    title: CATEGORY?.name,
-    description: CATEGORY?.description,
-    imageUrl: CATEGORY?.header,
+  if (categories.length === 0) {
+    return (
+      <Header.Root>
+        <div className={styles.load__categories}>
+          <Loader label="Carregando Produtos" />
+        </div>
+      </Header.Root>
+    )
   }
 
   return (
     <main>
       <Header.Root>
-        <Header.Banner props={CategoryHead} />
+        {loadCategory && (
+          <Header.Banner
+            title={loadCategory?.name}
+            description={loadCategory?.description}
+            imageUrl={loadCategory?.header}
+          />
+        )}
       </Header.Root>
 
-      <section className={styles.items__wrapper}>
-        {items?.map((props, index) => (
-          <CategoryItem key={`${index}${props.id}`} item={props} />
-        ))}
-      </section>
+      {loadProducts.length === 0 && (
+        <div className={styles.load__products}>
+          <Loader label="Carregando Produtos" />
+        </div>
+      )}
+
+      {loadProducts.length > 0 && (
+        <section className={styles.items__wrapper}>
+          {loadProducts?.map((props, index) => (
+            <CategoryItem key={`${index}${props.id}`} item={props} />
+          ))}
+        </section>
+      )}
     </main>
   )
 }

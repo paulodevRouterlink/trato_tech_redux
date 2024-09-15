@@ -1,0 +1,17 @@
+@use '@/sass/main';
+
+.header {
+  background-image: url('@/assets/fundo.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 15rem 20rem;
+  position: relative;
+
+  @media (max-width: main.$tablet) {
+    padding-top: 25rem;
+  }
+
+  @media (max-width: main.$mobile-sm) {
+    padding: 25rem 5rem 10rem 5rem;
+  }
+}

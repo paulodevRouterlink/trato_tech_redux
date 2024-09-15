@@ -9,6 +9,11 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  p {
+    font-size: 2.7em;
+    color: main.$midnight-200;
+  }
 }
 
 .spinner {
@@ -17,10 +22,10 @@
   align-items: center;
 
   &__loader {
-    border: 0.2rem solid rgba(0, 0, 0, 0.1);
-    border-top: 0.2rem solid #626364;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid main.$midnight-950;
     border-radius: 50%;
-    @include boxSize(2.4);
+    @include boxSize(4);
     animation: spin 1s linear infinite;
   }
 }

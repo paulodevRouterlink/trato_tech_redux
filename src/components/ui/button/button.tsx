@@ -1,12 +1,12 @@
-import { ButtonHTMLAttributes } from 'react'
+import { ComponentProps } from 'react'
 import styles from './button.module.scss'
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  props: { label: string }
+type ButtonProps = ComponentProps<'button'> & {
+  text: string
 }
 
-export const Button = ({ props, ...rest }: ButtonProps) => (
+export const Button = ({ text, ...rest }: ButtonProps) => (
   <button {...rest} className={styles.button}>
-    {props.label}
+    {text}
   </button>
 )

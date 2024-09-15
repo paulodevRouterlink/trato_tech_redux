@@ -1,5 +1,4 @@
-import { HeaderRoot } from './header-root'
-import { HeaderWithImage, HeaderWithoutImage } from './modules'
+import { HeaderWithImage, HeaderWithoutImage, HeaderRoot } from './components'
 
 export const Header = {
   Root: HeaderRoot,

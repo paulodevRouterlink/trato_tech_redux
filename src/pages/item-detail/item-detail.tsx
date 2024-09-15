@@ -1,25 +1,19 @@
-import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/io'
-import { useProducts } from '@/hooks/useProducts'
 import { Header } from '@/components/layout'
+import { useProducts } from './useProducts'
 import styles from './item-detail.module.scss'
 
 export const ItemDetail = () => {
-  const { item, product, setProduct } = useProducts()
+  const { productDetail } = useProducts()
   const navigate = useNavigate()
-
-  useEffect(() => {
-    if (item) {
-      setProduct(item)
-    }
-  }, [])
 
   return (
     <div>
       <Header.Root>
         <Header.Title
-          props={{ title: product?.title, description: product?.description }}
+          title={productDetail?.title || ''}
+          description={productDetail?.description}
         />
       </Header.Root>
 
@@ -28,7 +22,7 @@ export const ItemDetail = () => {
       </button>
 
       <div className={styles.image}>
-        <img src={product?.photoUrl} alt={product?.title} />
+        <img src={productDetail?.photoUrl} alt={productDetail?.title} />
       </div>
     </div>
   )

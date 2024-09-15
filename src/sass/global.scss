@@ -11,7 +11,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: main.$white-200;
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -34,4 +34,13 @@ input {
 
 button {
   cursor: pointer;
+}
+
+.Toastify__toast-container {
+  z-index: 9999;
+}
+
+.Toastify__toast-body {
+  font-family: main.$font_montserrat;
+  font-size: 1.8rem;
 }

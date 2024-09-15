@@ -1,31 +1,24 @@
 @use '@/sass/main';
 
-$button-color: main.$midnight-700;
-
 .button {
-  background-color: main.$midnight-800;
-  border-radius: 1.6rem;
-  border: 0.2rem solid transparent;
+  background-color: main.$midnight-950;
+  border-radius: 5rem;
+  border: none;
 
   color: main.$white-50;
 
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-family: main.$font_montserrat;
-  font-weight: main.$fw_semibold;
+  font-weight: main.$fw_medium;
 
   line-height: 1.5rem;
-  letter-spacing: 0.1rem;
-  padding: 1rem 2rem;
+  letter-spacing: 0.3rem;
+  padding: 2rem 3rem;
 
   transition: all 0.2s ease-in;
 
   &:hover {
-    background-color: transparent;
-
-    color: $button-color;
-    border: 0.2rem solid $button-color;
-
-    transform: translateY(-2px);
+    background-color: main.$midnight-400;
   }
 
   &:active {

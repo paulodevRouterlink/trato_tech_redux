@@ -48,7 +48,7 @@ export const FormAdvertise = () => {
       />
 
       <div className={styles['form-action']}>
-        <Button type="submit" props={{ label: 'Cadastrar produto' }} />
+        <Button type="submit" text="Cadastrar produto" />
       </div>
     </form>
   )

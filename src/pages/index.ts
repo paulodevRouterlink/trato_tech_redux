@@ -1,7 +1,6 @@
 export * from './home/home'
 export * from './cart/cart'
 export * from './advertise/advertise'
-export * from './categories/categories'
 export * from './item-detail/item-detail'
 export * from './category/category'
 export * from './payment/payment'

@@ -6,10 +6,8 @@ export const Advertise = () => (
   <main>
     <Header.Root>
       <Header.Title
-        props={{
-          title: 'Anuncie aqui!',
-          description: 'Anuncie seu produto no melhor site do Brasil!',
-        }}
+        title="Anuncie aqui!"
+        description="Anuncie seu produto no melhor site do Brasil!"
       />
     </Header.Root>
 

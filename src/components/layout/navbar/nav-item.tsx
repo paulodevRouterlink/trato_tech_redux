@@ -3,23 +3,21 @@ import classNames from 'classnames'
 import styles from './navbar.module.scss'
 
 type NavItemProps = {
-  props: {
-    path: string
-    label: string
-  }
+  path: string
+  label: string
 }
 
-export const NavItem = ({ props }: NavItemProps) => {
+export const NavItem = ({ path, label }: NavItemProps) => {
   const { pathname } = useLocation()
 
   return (
     <Link
-      to={props.path}
+      to={path}
       className={classNames(styles.link, {
-        [styles['link--selected']]: pathname === props.path,
+        [styles['link--selected']]: pathname === path,
       })}
     >
-      {props.label}
+      {label}
     </Link>
   )
 }

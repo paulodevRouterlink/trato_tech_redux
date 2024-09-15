@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter as AppRoutes } from 'react-router-dom'
 import { Provider as ReduxProvider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
-import { store } from './store'
 import { App } from './App'
+import store from '@/store/store'
 import 'react-toastify/dist/ReactToastify.css'
-import './styles/toastify.css'
 import './sass/global.scss'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -15,7 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <AppRoutes basename="/">
         <App />
         <ToastContainer
-          position="bottom-center"
+          position="top-right"
           autoClose={5000}
           hideProgressBar={false}
           newestOnTop={false}
@@ -28,5 +27,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         />
       </AppRoutes>
     </ReduxProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 )

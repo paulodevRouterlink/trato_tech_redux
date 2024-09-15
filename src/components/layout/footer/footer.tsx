@@ -12,7 +12,7 @@ export const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div>
-        {FOOTER_ICONS.map(props => (
+        {FOOTER_ICONS.map((props) => (
           <Icon key={props.id} icon={props.icon} size={24} />
         ))}
       </div>

@@ -1,9 +1,0 @@
-/* styles.css */
-.Toastify__toast-container {
-  z-index: 9999;
-}
-
-.Toastify__toast-body {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.8rem;
-}

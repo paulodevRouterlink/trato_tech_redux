@@ -1,19 +1,19 @@
-import { CategoriesList, Header } from '@/components/layout'
-import { AboutUs } from './components/about-us/about-us'
+import { Header } from '@/components/layout'
+import { Loader } from '@/components/ui'
+import { useHome } from './useHome'
 import Clock from '@/assets/inicial.png'
 import styles from './home.module.scss'
 
 export const Home = () => {
-  const HeadingProps = {
-    title: 'Classificados Tech',
-    description: 'Compre diversos tipos de produtos no melhor site do Brasil!',
-    imageUrl: Clock,
-  }
+  const { navigate, categories } = useHome()
+
   return (
     <main>
       <Header.Root>
         <Header.Banner
-          props={HeadingProps}
+          title="Classificados Tech"
+          description="Compre, venda, anuncie, troque diversos tipos de produtos e serviços da área de tecnologia!"
+          imageUrl={Clock}
           style={{ paddingBottom: '25rem' }}
         />
       </Header.Root>
@@ -23,9 +23,18 @@ export const Home = () => {
           <h1>Categorias</h1>
         </div>
 
-        <CategoriesList />
+        <div className={styles.load__categories}>
+          {categories.length === 0 && <Loader label="Carregando Categorias" />}
+        </div>
 
-        <AboutUs />
+        <section className={styles['categories-container']}>
+          {categories.map((item) => (
+            <div key={item.id} onClick={() => navigate(`/category/${item.id}`)}>
+              <img src={item.thumbnail} alt={item.name} />
+              <h1>{item.name}</h1>
+            </div>
+          ))}
+        </section>
       </section>
     </main>
   )

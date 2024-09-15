@@ -9,7 +9,7 @@ export const Loader = ({ label }: LoaderProps) => (
     <div className={styles.spinner}>
       <span className={styles.spinner__loader} />
     </div>
-    {label}
+
+    <p>{label}</p>
   </div>
 )
-

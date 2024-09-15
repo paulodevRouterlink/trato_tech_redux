@@ -14,7 +14,7 @@ $size-select-icon: 3.7rem;
   width: 100%;
   height: $size-select-icon;
   overflow: hidden;
-  border-radius: 0.5rem;
+  border-radius: 1.5rem;
 
   border: none;
 
@@ -24,7 +24,7 @@ $size-select-icon: 3.7rem;
   }
 
   select {
-    background: transparent; /* importante para exibir o novo ícone */
+    background: transparent;
     width: 100%;
     padding: 1rem 2rem;
 
@@ -53,7 +53,7 @@ $size-select-icon: 3.7rem;
 }
 
 .select-error {
-  border: 0.2rem solid main.$red-600;
+  border: 1px solid main.$red-600;
 
   select {
     color: main.$red-600;
